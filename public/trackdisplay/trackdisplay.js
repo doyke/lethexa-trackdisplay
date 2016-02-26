@@ -1,7 +1,8 @@
 (function() {
 
   var app = angular.module('trackDisplay', [
-    'trackMap'
+    'trackMap',
+    'trackInfo'
   ]);
 
   app.directive('trackDisplay', function() {

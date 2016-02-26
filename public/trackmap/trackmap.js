@@ -9,7 +9,10 @@
       require: 'E',
       replace: true,
       controller: 'TrackMapCtrl',
-      templateUrl: 'trackmap/trackmap.html'
+      templateUrl: 'trackmap/trackmap.html',
+      scope: {
+        selected: "="
+      }
     };
   })
 
@@ -61,7 +64,17 @@
         });
         trackMarker.on('click', function(event) {
           var marker = event.target;
-          //console.log('marker', marker);
+          console.log('marker', marker);
+          console.log('scope: ', $scope);
+          $scope.$apply(function () {
+            $scope.selected = {
+              trackid: marker._id, 
+              time: 1234567,
+              speed: marker._speed,
+              course: marker._course,
+              heading: marker._heading
+            };
+          });
         });
 
         trackMarker.bindPopup('');
