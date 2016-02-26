@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="trackDisplay">
+    <head>
+        <title>Track-Display</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap-theme.css" />
+        <link rel="stylesheet" href="components/leaflet/dist/leaflet.css" />
+        <style>
+            body {
+                padding: 0;
+                margin: 0;
+            }
+            html, body, #map {
+                height: 100%;
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+
+      <track-display></track-display>
+
+      <script src="components/jquery/dist/jquery.min.js"></script>
+      <script src="components/bootstrap/dist/js/bootstrap.min.js"></script>
+      <script src="components/angularjs/angular.js"></script>
+      <script src="components/angular-route/angular-route.js"></script>
+      <script src="components/angular-websocket/angular-websocket.js"></script>
+      <script src="components/angular-bootstrap/ui-bootstrap.js"></script>
+      <script src="components/leaflet/dist/leaflet.js"></script>
+      <script src="components/leaflet-tracksymbol/leaflet-tracksymbol.js"></script>
+      <script src="components/leaflet-tracksymbol/leaflet-tracklayer.js"></script>
+
+      <!-- The app -->
+      <script src="track-api/track-api.js"></script>
+      <script src="trackmap/trackmap.js"></script>
+      <script src="trackdisplay/trackdisplay.js"></script>
+    </body>
+</html>
+
