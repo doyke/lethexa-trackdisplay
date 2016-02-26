@@ -77,10 +77,10 @@
           });
         });
 
-        trackMarker.bindPopup('');
-        trackMarker.on('popupopen', function() {
-          trackMarker._popup.setContent(createPopupContent(track));
-        });
+        // trackMarker.bindPopup('');
+        // trackMarker.on('popupopen', function() {
+        //   trackMarker._popup.setContent(createPopupContent(track));
+        // });
         trackPicture[track.trackId] = trackMarker;
         trackLayer.addTrack(trackMarker);
       }
