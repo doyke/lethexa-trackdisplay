@@ -9,8 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://git.home.web/base/js/lethexa-trackdisplay.git"
+    "url": "git@github.com:lethexa/lethexa-trackdisplay.git"
   },
+  "keywords": [
+    "AMQP",
+    "Websocket",
+    "Track",
+    "Leaflet"
+  ],
   "author": "",
   "license": "MIT",
   "author": "Tim Leerhoff",
