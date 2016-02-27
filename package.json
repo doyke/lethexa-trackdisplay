@@ -17,9 +17,8 @@
     "Track",
     "Leaflet"
   ],
-  "author": "",
-  "license": "MIT",
   "author": "Tim Leerhoff",
+  "license": "MIT",
   "devDependencies": {
     "grunt": "~0.4.5",
     "grunt-contrib-concat": "^0.5.1",

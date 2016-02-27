@@ -69,10 +69,12 @@
           $scope.$apply(function () {
             $scope.selected = {
               trackid: marker._id, 
-              time: 1234567,
-              speed: marker._speed,
-              course: marker._course,
-              heading: marker._heading
+              time: units.ABSTIME.asString(1234567),
+              speed: units.SPEED.asString(marker._speed),
+              course: units.DIRECTION.asString(marker._course),
+              heading: units.DIRECTION.asString(marker._heading),
+              lat: units.LATITUDE.asString(marker._latlng.lat),
+              lon: units.LONGITUDE.asString(marker._latlng.lng)
             };
           });
         });
