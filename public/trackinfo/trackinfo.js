@@ -1,6 +1,8 @@
 (function() {
 
-  var trackInfo = angular.module('trackInfo', []);
+  var trackInfo = angular.module('trackInfo', [
+    'trackAPI'
+  ]);
 
   trackInfo.directive('trackInfo', function() {
     return {
@@ -14,8 +16,8 @@
     };
   });
 
-  trackInfo.controller('TrackInfoCtrl', function($scope) {
-    $scope.selected = undefined;
+  trackInfo.controller('TrackInfoCtrl', function($scope, $trackAPI) {
+
   });
 
 }());

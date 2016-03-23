@@ -39,6 +39,18 @@
       return result;
     };
 
+    var updateSelectedTrackBy = function(track) {
+      return {    
+        trackId: track.trackId,
+        time: units.ABSTIME.asString(track.time),
+        speed: units.SPEED.asString(track.speed),
+        course: units.DIRECTION.asString(track.course),
+        heading: units.DIRECTION.asString(track.heading),
+        lat: units.LATITUDE.asString(track.lat),
+        lon: units.LONGITUDE.asString(track.lon)
+      };
+    }; 
+
     $trackAPI.registerForTracks( function(track) {
 
       if(trackPicture[track.trackId] === undefined) {
@@ -64,18 +76,10 @@
         });
         trackMarker.on('click', function(event) {
           var marker = event.target;
-          console.log('marker', marker);
-          console.log('scope: ', $scope);
+          //console.log('marker', marker);
+          //console.log('scope: ', $scope);
           $scope.$apply(function () {
-            $scope.selected = {
-              trackid: marker._id, 
-              time: units.ABSTIME.asString(1234567),
-              speed: units.SPEED.asString(marker._speed),
-              course: units.DIRECTION.asString(marker._course),
-              heading: units.DIRECTION.asString(marker._heading),
-              lat: units.LATITUDE.asString(marker._latlng.lat),
-              lon: units.LONGITUDE.asString(marker._latlng.lng)
-            };
+            $scope.selected = updateSelectedTrackBy(track);
           });
         });
 
@@ -97,6 +101,14 @@
         trackMarker.setCourse(track.course);
         trackMarker.setHeading(track.heading);
         trackMarker.setGPSRefPos(track.gpsRefPos);
+
+        if($scope.selected === undefined)
+          return;
+
+        if($scope.selected.trackId === track.trackId ) {
+          $scope.selected = updateSelectedTrackBy(track);
+        }
+
       }
     });
 

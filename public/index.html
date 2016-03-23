@@ -9,8 +9,11 @@
         <link rel="stylesheet" href="components/leaflet/dist/leaflet.css" />
         <style>
             body {
-                padding: 0;
-                margin: 0;
+                padding-top: 55px !important;
+                padding-bottom: 55px !important;
+		padding-left: 5px !important;
+		padding-right: 5px !important;
+		margin: 0px !important;
             }
             html, body, #map {
                 height: 100%;
@@ -20,7 +23,45 @@
     </head>
     <body>
 
-      <track-display></track-display>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid" style="margin-left: 10px; padding: 0px;">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Track-display</a>
+        </div> 
+
+        <ul class="nav navbar-nav">
+        </ul>
+
+      </div>
+    </nav>
+
+
+
+    <div class="container-fluid" style="width: 100%; height: 100%; margin: 0px; padding: 0px;">
+      <div class="row" style="width: 100%; height:100%;">
+        <div class="col-md-8" style="height:100%;">
+          <track-map selected="selectedContact"></track-map>
+	</div>
+        <div class="col-md-4" style="height:100%;">
+	  <track-info selected="selectedContact"></track-info>
+	</div>
+      </div>
+    </div>
+
+
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+      <div class="container-fluid">
+        <div class="navbar-header">
+        </div>
+
+        <ul class="nav navbar-nav">
+        </ul>
+
+      </div>
+    </nav>
+
+
+
 
       <script src="components/jquery/dist/jquery.min.js"></script>
       <script src="components/bootstrap/dist/js/bootstrap.min.js"></script>

@@ -19,8 +19,8 @@ var MsgQueue = require('./lib/msgqueue').MsgQueue;
 
 var connections = [];
 var mq = new MsgQueue('simulator', { 
-  exchange: 'simulator',
-  topics: ['sim.tracks.*']
+  exchange: 'wis.sim',
+  topics: ['wis.ptf.test.navdata', 'wis.ptf.test.systemtrack']
 });
 mq.initialize();
 mq.on('data', function(routingKey, msg) {
