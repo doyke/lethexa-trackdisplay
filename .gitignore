@@ -8,3 +8,4 @@
 results.txt
 npm-debug.log
 *.swp
+/nbproject/private/
