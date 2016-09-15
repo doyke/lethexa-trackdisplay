@@ -47,7 +47,13 @@
         course: units.DIRECTION.asString(track.course),
         heading: units.DIRECTION.asString(track.heading),
         lat: units.LATITUDE.asString(track.lat),
-        lon: units.LONGITUDE.asString(track.lon)
+        lon: units.LONGITUDE.asString(track.lon),
+        name: track.name,
+        callsign: track.callsign,
+        dest: track.dest,
+        country: track.country,
+        objlength: track.objlength,
+        objbeam: track.objbeam
       };
     }; 
 
