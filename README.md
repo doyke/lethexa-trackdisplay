@@ -9,7 +9,8 @@ To show tracks on the display send json-objects to AMQP
 to topic 'sim.tracks.xyz':
 
 	{
-		"time":1456515394945,      // [ms]
+		"firstctc":1456515394945,  // [ms]
+		"lastctc":1456515394945,   // [ms]
 		"trackId":211317180,       
 		"lat":53.906445,           // Decimal degrees
 		"lon":8.689741666666666,   // Decimal degrees
