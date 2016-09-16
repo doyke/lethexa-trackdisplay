@@ -32,6 +32,8 @@
   },
   "dependencies": {
     "amqplib": "^0.4.0",
+    "body-parser": "^1.15.2",
+    "cors": "^2.8.1",
     "express": "^4.13.3",
     "express-ws": "^0.2.6",
     "websocket": "^1.0.21"

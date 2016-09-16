@@ -2,15 +2,25 @@ var PORT = 8000;
 var HOST = '127.0.0.1';
 var express = require('express');
 var http = require('http');
+var bodyParser = require('body-parser');
 var app = express();
+var cors = require('cors');
 
 // this will make Express serve your static files
 var serverPath = __dirname + '/public/';
 app.use(express.static(serverPath));
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 var httpServer = http.createServer(app).listen(PORT);
 console.log('Http-server started in port ' + PORT);
 
+
+app.get('/ais', function(req, res) {
+  //var geojson = cvtAisToGeoJson(aispicture);
+  res.json({});    
+});
 
 
 
