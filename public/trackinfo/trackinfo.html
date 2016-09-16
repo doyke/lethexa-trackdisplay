@@ -1,74 +1,109 @@
 <div>
-  <div class="panel panel-default">
-    <div class="panel-heading">Dynamic data</div>
-    <div class="panel-body" style="padding: 0px;">
-      <table class="table table-striped table-bordered" style="padding: 0px; margin: 0px;">
-	<tr>
-	  <td style="width: 120px;">TrackId:</td>
-	  <td>{{selected.trackId}}</td>
-	</tr>
-	<tr>
-	  <td>Time:</td>
-	  <td>{{selected.time}}</td>
-	</tr>
-	<tr>
-	  <td>Latitude:</td>
-	  <td>{{selected.lat}}</td>
-	</tr>
-	<tr>
-	  <td>Longitude:</td>
-	  <td>{{selected.lon}}</td>
-	</tr>
-	<tr>
-	  <td>Heading:</td>
-	  <td>{{selected.heading}}</td>
-	</tr>
-	<tr>
-	  <td>Course:</td>
-	  <td>{{selected.course}}</td>
-	</tr>
-	<tr>
-	  <td>Speed:</td>
-	  <td>{{selected.speed}}</td>
-	</tr>
-      </table>
+  <div class="panel panel-default panel-info"> 
+    <div class="panel-heading">
+        &nbsp;<img src="/flags/blank.png" class="{{getFlagClass(selected.country)}}" alt="{{selected.country}}" />
+        &nbsp; {{selected.name}} 
+        &nbsp; {{selected.trackId}}
     </div>
-  </div>
-
-  <div class="panel panel-default">
-    <div class="panel-heading">Voyage data</div>
     <div class="panel-body" style="padding: 0px;">
-      <table class="table table-striped table-bordered" style="padding: 0px; margin: 0px;">
-	<tr>
-	  <td style="width: 120px;">Destination:</td>
-	  <td>{{selected.dest}}</td>
-	</tr>
-      </table>
-    </div>
-  </div>
 
-  <div class="panel panel-default">
-    <div class="panel-heading">Static data</div>
-    <div class="panel-body" style="padding: 0px;">
-      <table class="table table-striped table-bordered" style="padding: 0px; margin: 0px;">
-	<tr>
-	  <td style="width: 120px;">Name:</td>
-	  <td>{{selected.name}}</td>
-	</tr>
-	<tr>
-	  <td>Callsign:</td>
-	  <td>{{selected.callsign}}</td>
-	</tr>
-	<tr>
-	  <td>Country:</td>
-	  <td><img src="/flags/blank.png" class="flag flag-{{selected.country}}" alt="{{selected.country}}" />&nbsp;{{selected.country}}</td>
-	</tr>
-	<tr>
-	  <td>L x B [m x m]:</td>
-	  <td>{{selected.objlength}} x {{selected.objbeam}}</td>
-	</tr>
-      </table>
-    </div>
-  </div>
+      <div class="panel panel-default" style="margin: 0px;">
+	<div class="panel-heading">Dynamic data</div>
+	<div class="panel-body" style="padding: 0px;">
+	  <table class="table table-striped table-bordered" style="padding: 0px; margin: 0px;">
+	    <tr>
+	      <td style="width: 150px;">TrackId:</td>
+	      <td>{{selected.trackId}}</td>
+	    </tr>
+	    <tr>
+	      <td>First contact:</td>
+	      <td>{{cvtTime(selected.firstctc)}}</td>
+	    </tr>
+	    <tr>
+	      <td>Last contact:</td>
+	      <td>{{cvtTime(selected.lastctc)}}</td>
+	    </tr>
+	    <tr>
+	      <td>Position:</td>
+	      <td>{{cvtPosition(selected.lat, selected.lon)}}</td>
+	    </tr>
+	    <tr>
+	      <td>Heading:</td>
+	      <td>{{cvtDirection(selected.heading)}}</td>
+	    </tr>
+	    <tr>
+	      <td>Course:</td>
+	      <td>{{cvtDirection(selected.course)}}</td>
+	    </tr>
+	    <tr>
+	      <td>Rate of turn:</td>
+	      <td>{{cvtRoteOfTurn(selected.rot)}}</td>
+	    </tr>
+	    <tr>
+	      <td>Speed:</td>
+	      <td>{{cvtSpeed(selected.speed)}}</td>
+	    </tr>
+	  </table>
+	</div>
+      </div>
 
+      <div class="panel panel-default" style="margin: 0px;">
+	<div class="panel-heading">Voyage data</div>
+	<div class="panel-body" style="padding: 0px;">
+	  <table class="table table-striped table-bordered" style="padding: 0px; margin: 0px;">
+	    <tr>
+	      <td style="width: 150px;">Destination:</td>
+	      <td>{{selected.dest}}</td>
+	    </tr>
+	    <tr>
+	      <td>Cargo:</td>
+	      <td>{{selected.cargoname}}</td>
+	    </tr>
+	    <tr>
+	      <td>Draught:</td>
+	      <td>{{cvtLength(selected.draught)}}</td>
+	    </tr>
+	  </table>
+	</div>
+      </div>
+
+      <div class="panel panel-default" style="margin: 0px;">
+	<div class="panel-heading">Static data</div>
+	<div class="panel-body" style="padding: 0px;">
+	  <table class="table table-striped table-bordered" style="padding: 0px; margin: 0px;">
+	    <tr>
+	      <td style="width: 150px;">Name:</td>
+	      <td>{{selected.name}}</td>
+	    </tr>
+	    <tr>
+	      <td>Callsign:</td>
+	      <td>{{selected.callsign}}</td>
+	    </tr>
+	    <tr>
+	      <td>IMO:</td>
+	      <td>{{selected.imo}}</td>
+	    </tr>
+	    <tr>
+	      <td>Length x Beam:</td>
+	      <td>{{cvtDimensions(selected.objlength, selected.objbeam)}}</td>
+	    </tr>
+	    <tr>
+	      <td>Type:</td>
+	      <td>{{cvtType(selected.type)}}</td>
+	    </tr>
+	    <tr>
+	      <td>Nav.-device:</td>
+	      <td>{{selected.navdev}}</td>
+	    </tr>
+	  </table>
+	</div>
+      </div>
+      <div class="well well-sm">
+        <a target="_blank" href="http://www.marinetraffic.com/en/ais/details/ships/mmsi:{{selected.trackId}}">MarineTraffic.com</a>
+
+        <!-- <button ng-click="{{toClipBoard()}}">Copy</button> -->
+      </div>
+
+      </div>
+   </div>
 </div>

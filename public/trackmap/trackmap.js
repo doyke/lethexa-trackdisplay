@@ -17,20 +17,26 @@
   })
 
   trackMap.controller('TrackMapCtrl', ['$scope', '$trackAPI', function($scope, $trackAPI) {
-    var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    var openStreetMapUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    var openSeaMapmUrl = 'https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png';
+    
     var map = L.map('map').setView([53.5, 8.125], 10);
-    L.tileLayer(osmUrl, {
+    L.tileLayer(openStreetMapUrl, {
+      minZoom: 3
+    }).addTo(map);
+
+    L.tileLayer(openSeaMapmUrl, {
       minZoom: 3
     }).addTo(map);
 
     var trackPicture = {};
     var trackLayer = L.trackLayer();
     trackLayer.addTo(map);
-   
+
     var fixString = function(value) {
       return value.replace(/@/gi, '');
     };
- 
+
     var createPopupContent = function(track) {
       var result = '';
       result += '<table>';
@@ -39,7 +45,20 @@
       return result;
     };
 
+    var updateParametersFromTo = function(src, dst) {
+      for (var property in src) {
+        if (src.hasOwnProperty(property)) {
+          dst[property] = src[property];
+        }
+      }
+    };
+
     var updateSelectedTrackBy = function(track) {
+      var newTrack = {};
+      updateParametersFromTo(track, newTrack);
+      return newTrack;
+      
+      /*
       return {    
         trackId: track.trackId,
         time: units.ABSTIME.asString(track.time),
@@ -54,10 +73,10 @@
         country: track.country,
         objlength: track.objlength,
         objbeam: track.objbeam
-      };
+      };*/
     }; 
 
-    $trackAPI.registerForTracks( function(track) {
+    $trackAPI.addListenerFor( 'track', function(track) {
 
       if(trackPicture[track.trackId] === undefined) {
 
@@ -69,7 +88,7 @@
         var trackMarker = L.trackSymbol(L.latLng(track.lat, track.lon), {
           trackId: track.trackId,
           fill: true,
-          fillColor: '#0000ff',
+          fillColor: '#ffffff',
           fillOpacity: 1.0,
           stroke: true,
           color: '#000000',
@@ -80,12 +99,13 @@
           course: track.course === null ? undefined : track.course,
           heading: track.heading === null ? undefined : track.heading
         });
+	trackMarker.track = track;
         trackMarker.on('click', function(event) {
           var marker = event.target;
           //console.log('marker', marker);
           //console.log('scope: ', $scope);
           $scope.$apply(function () {
-            $scope.selected = updateSelectedTrackBy(track);
+            $scope.selected = updateSelectedTrackBy(trackMarker.track);
           });
         });
 
@@ -102,7 +122,8 @@
         if(track.lat && track.lon) {
           trackMarker.setLatLng( L.latLng(track.lat, track.lon) );
         }
-
+	trackMarker.track = track;
+        trackMarker.setStyle({fillColor: track.color.fill, color: track.color.line});
         trackMarker.setSpeed(track.speed);
         trackMarker.setCourse(track.course);
         trackMarker.setHeading(track.heading);
@@ -112,7 +133,7 @@
           return;
 
         if($scope.selected.trackId === track.trackId ) {
-          $scope.selected = updateSelectedTrackBy(track);
+          $scope.selected = updateSelectedTrackBy(trackMarker.track);
         }
 
       }
