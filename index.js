@@ -5,8 +5,10 @@ var http = require('http');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var trkpic = require('./lib/trackpicture');
+var trkhist = require('./lib/positionhistory');
 var geojsonservice = require('./lib/geojsonservice');
 var trackservice = require('./lib/trackservice');
+var historyservice = require('./lib/historyservice');
 
 
 var app = express();
@@ -21,8 +23,10 @@ var httpServer = http.createServer(app).listen(PORT);
 console.log('Http-server started in port ' + PORT);
 
 var trackPicture = new trkpic.TrackPicture();
+var trackHistory = new trkhist.TrackHistory();
 geojsonservice.registerService(app, trackPicture);
 trackservice.registerService(app, trackPicture);
+historyservice.registerService(app, trackHistory);
 
 
 
@@ -40,6 +44,7 @@ mq.on('data', function(routingKey, msg) {
 //  console.log(routingKey, msg);
   if(jsonMsg.header.type === 'track') {
     trackPicture.saveTrack(jsonMsg);
+    trackHistory.saveTrack(jsonMsg);
   }
 
   connections.forEach( function(connection) {
