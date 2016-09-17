@@ -11,7 +11,8 @@
       controller: 'TrackMapCtrl',
       templateUrl: 'trackmap/trackmap.html',
       scope: {
-        selected: "="
+        selected: "=",
+        updatePosition: "="
       }
     };
   })

@@ -3,9 +3,12 @@ var HOST = '127.0.0.1';
 var express = require('express');
 var http = require('http');
 var bodyParser = require('body-parser');
-var app = express();
 var cors = require('cors');
+var trkpic = require('./lib/trackpicture');
+var tracksgeojson = require('./lib/geojsonservice');
 
+
+var app = express();
 // this will make Express serve your static files
 var serverPath = __dirname + '/public/';
 app.use(express.static(serverPath));
@@ -16,11 +19,9 @@ app.use(bodyParser.json());
 var httpServer = http.createServer(app).listen(PORT);
 console.log('Http-server started in port ' + PORT);
 
+var trackPicture = new trkpic.TrackPicture();
 
-app.get('/ais', function(req, res) {
-  //var geojson = cvtAisToGeoJson(aispicture);
-  res.json({});    
-});
+tracksgeojson.registerService(app, trackPicture);
 
 
 
@@ -36,6 +37,9 @@ mq.initialize();
 mq.on('data', function(routingKey, msg) {
   var jsonMsg = JSON.parse(msg);
 //  console.log(routingKey, msg);
+  if(jsonMsg.header.type === 'track') {
+    trackPicture.saveTrack(jsonMsg);
+  }
 
   connections.forEach( function(connection) {
     connection.sendUTF(msg);
@@ -52,6 +56,10 @@ wsServer.on('request', function (request) {
     connections.push(connection);
     console.log('Connection on websocket accepted...');
 
+    trackPicture.provideTracksOn(function(track) {
+      connection.sendUTF(JSON.stringify(track));
+    });
+    
     connection.on('message', function (message) {
 //      console.log('message', message.utf8Data);
     });
