@@ -5,7 +5,8 @@ var http = require('http');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var trkpic = require('./lib/trackpicture');
-var tracksgeojson = require('./lib/geojsonservice');
+var geojsonservice = require('./lib/geojsonservice');
+var trackservice = require('./lib/trackservice');
 
 
 var app = express();
@@ -20,8 +21,8 @@ var httpServer = http.createServer(app).listen(PORT);
 console.log('Http-server started in port ' + PORT);
 
 var trackPicture = new trkpic.TrackPicture();
-
-tracksgeojson.registerService(app, trackPicture);
+geojsonservice.registerService(app, trackPicture);
+trackservice.registerService(app, trackPicture);
 
 
 
