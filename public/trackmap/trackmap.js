@@ -12,7 +12,7 @@
       templateUrl: 'trackmap/trackmap.html',
       scope: {
         selected: "=",
-        updatePosition: "="
+        mapcenter: "="
       }
     };
   })
@@ -34,10 +34,6 @@
     var trackLayer = L.trackLayer();
     trackLayer.addTo(map);
 
-    var fixString = function(value) {
-      return value.replace(/@/gi, '');
-    };
-
     var createPopupContent = function(track) {
       var result = '';
       result += '<table>';
@@ -54,6 +50,12 @@
       }
     };
 
+    $scope.$watch('mapcenter', function (center) {
+      if(center === undefined)
+	return;
+      map.panTo(new L.LatLng(center.lat, center.lon));
+    });
+    
     var updateSelectedTrackBy = function(track) {
       var newTrack = {};
       updateParametersFromTo(track, newTrack);

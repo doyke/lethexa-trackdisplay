@@ -24,7 +24,7 @@
 	      <td>{{cvtTime(selected.lastctc)}}</td>
 	    </tr>
 	    <tr>
-	      <td>Position:</td>
+	      <td>Position:<button class="btn btn-default btn-xs" ng-show='selected != undefined' ng-click="recenter()">+</button></td>
 	      <td>{{cvtPosition(selected.lat, selected.lon)}}</td>
 	    </tr>
 	    <tr ng-show='selected.heading != undefined'>

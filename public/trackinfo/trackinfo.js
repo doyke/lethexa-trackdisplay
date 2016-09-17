@@ -9,7 +9,8 @@
       restrict: 'E',
       replace: true,
       scope: {
-        selected: '='
+        selected: '=',
+	mapcenter: '='
       },
       templateUrl: 'trackinfo/trackinfo.html',
       controller: 'TrackInfoCtrl'
@@ -17,6 +18,13 @@
   });
 
   trackInfo.controller('TrackInfoCtrl', function($scope, $trackAPI) {
+
+    $scope.recenter = function() {
+      var track = $scope.selected;
+      if(track === undefined)
+	return;
+      $scope.mapcenter = track;
+    };
 
     $scope.getFlagClass = function(value) {
       if(value === undefined)
