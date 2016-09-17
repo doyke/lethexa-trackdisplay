@@ -4,7 +4,6 @@
   ]);
 
   trackAPI.factory('$trackAPI', ['$websocket', function($websocket) {
-    var trackStream = $websocket('ws://' + window.location.host + '/', 'tracks');
     var listenerMap = {};
 
     var notifyListenersFor = function(msgType, msg) {
@@ -16,11 +15,28 @@
       }
     };
 
-    trackStream.onMessage(function(message) {
-      var msg = JSON.parse(message.data);
-      notifyListenersFor(msg.header.type, msg);
-    });
+    var connect = function() {
+      var trackStream = $websocket('ws://' + window.location.host + '/', 'tracks');
+      
+      trackStream.onOpen(function() {
+        console.log('Websocket opened');
+      });
 
+      trackStream.onMessage(function(message) {
+        var msg = JSON.parse(message.data);
+        notifyListenersFor(msg.header.type, msg);
+      });
+
+      trackStream.onClose(function() {
+        console.log('Websocket closed');
+        setTimeout(function() {
+          connect();
+        }, 100);
+      });
+    };
+    
+    connect();
+    
     return {
       addListenerFor: function(msgType, callback) {
 	var foundList = listenerMap[msgType];
