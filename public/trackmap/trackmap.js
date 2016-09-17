@@ -77,6 +77,18 @@
       };*/
     }; 
 
+    var historyPath = L.polyline([], {color: 'blue'}).addTo(map);
+    
+    var updateHistoryPath = function( trackId ) {
+      $trackAPI.fetchHistoryPathFor(trackId, function(history) {
+        var linePoints = [];
+        history.forEach(function(state) {
+          linePoints.push(L.latLng(state.lat, state.lon))
+        });
+        historyPath.setLatLngs(linePoints);
+      });
+    };
+    
     $trackAPI.addListenerFor( 'track', function(track) {
 
       if(trackPicture[track.trackId] === undefined) {
@@ -100,14 +112,15 @@
           course: track.course === null ? undefined : track.course,
           heading: track.heading === null ? undefined : track.heading
         });
-	trackMarker.track = track;
+        trackMarker.track = track;
         trackMarker.on('click', function(event) {
           var marker = event.target;
           //console.log('marker', marker);
           //console.log('scope: ', $scope);
           $scope.$apply(function () {
             $scope.selected = updateSelectedTrackBy(trackMarker.track);
-          });
+            updateHistoryPath($scope.selected.trackId);
+         });
         });
 
         // trackMarker.bindPopup('');
@@ -135,6 +148,7 @@
 
         if($scope.selected.trackId === track.trackId ) {
           $scope.selected = updateSelectedTrackBy(trackMarker.track);
+	  updateHistoryPath(track.trackId);
         }
 
       }

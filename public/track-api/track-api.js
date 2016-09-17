@@ -3,7 +3,7 @@
     'ngWebSocket'
   ]);
 
-  trackAPI.factory('$trackAPI', ['$websocket', function($websocket) {
+  trackAPI.factory('$trackAPI', ['$websocket', '$http', function($websocket, $http) {
     var listenerMap = {};
 
     var notifyListenersFor = function(msgType, msg) {
@@ -36,8 +36,29 @@
     };
     
     connect();
+       
     
     return {
+      fetchHistoryPathFor: function(trackId, callback) {
+        $http({
+          method: 'GET',
+          url: '/trackhistory/' + trackId
+        }).then(
+	  function successCallback(response) {
+	    console.log(response.data);
+	    callback(response.data);
+	  }, 
+	  function errorCallback(response) {
+          }
+	);
+	/*
+	callback([
+          {lat: 53.5, lon: 8.125}, 
+          {lat: 53.0, lon: 8.125}
+	];
+	*/
+      },
+      
       addListenerFor: function(msgType, callback) {
 	var foundList = listenerMap[msgType];
 	if(foundList === undefined) {
