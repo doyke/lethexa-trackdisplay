@@ -41,12 +41,10 @@ var mq = new MsgQueue('simulator', {
 mq.initialize();
 mq.on('data', function(routingKey, msg) {
   var jsonMsg = JSON.parse(msg);
-//  console.log(routingKey, msg);
   if(jsonMsg.header.type === 'track') {
     trackPicture.saveTrack(jsonMsg);
     trackHistory.saveTrack(jsonMsg);
   }
-
   connections.forEach( function(connection) {
     connection.sendUTF(msg);
   });

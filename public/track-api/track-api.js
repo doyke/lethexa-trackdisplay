@@ -67,7 +67,7 @@
       
       addListenerFor: function(msgType, callback) {
         var foundList = listenerMap[msgType];
-	      if(foundList === undefined) {
+        if(foundList === undefined) {
           foundList = [];
           listenerMap[msgType] = foundList;
         }

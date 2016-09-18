@@ -18,7 +18,9 @@
   });
 
   trackInfo.controller('TrackSearchCtrl', function($scope, $trackAPI) {
-        
+    
+    $scope.searchTrackId = '';
+    
     var trimLine = function( line ) {
       if(line === undefined)
         return '';
