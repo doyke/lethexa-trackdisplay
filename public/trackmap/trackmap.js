@@ -56,6 +56,7 @@
       map.panTo(new L.LatLng(center.lat, center.lon));
     });
     
+    
     var updateSelectedTrackBy = function(track) {
       var newTrack = {};
       updateParametersFromTo(track, newTrack);

@@ -3,7 +3,9 @@
   var app = angular.module('trackDisplay', [
     'trackMap',
     'trackList',
-    'trackInfo'
+    'trackInfo',
+    'trackMessage',
+    'trackSearch'
   ]);
 
   app.directive('trackDisplay', function() {
@@ -16,6 +18,7 @@
   });
 
   app.controller('TrackDisplayCtrl', function($scope) {
+    $scope.tabName = "tab1";
   });
 
 }());

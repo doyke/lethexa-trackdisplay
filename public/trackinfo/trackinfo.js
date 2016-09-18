@@ -20,6 +20,7 @@
   trackInfo.controller('TrackInfoCtrl', function($scope, $trackAPI) {
 
     $scope.recenter = function() {
+      console.log('trackInfo:center');
       var track = $scope.selected;
       if(track === undefined)
 	return;

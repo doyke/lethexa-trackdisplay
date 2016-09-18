@@ -1,107 +1,50 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="trackDisplay">
-    <head>
-        <title>Track-Display</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap-theme.css" />
-        <link rel="stylesheet" href="components/leaflet/dist/leaflet.css" />
-        <link rel="stylesheet" href="/flags/flags.css" />
+  <head>
+    <title>Track-Display</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap-theme.css" />
+    <link rel="stylesheet" href="components/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="/flags/flags.css" />
 
-        <style>
+    <style>
             body {
                 padding-top: 55px !important;
                 padding-bottom: 55px !important;
-		padding-left: 5px !important;
-		padding-right: 5px !important;
-		margin: 0px !important;
+                padding-left: 5px !important;
+                padding-right: 5px !important;
+                margin: 0px !important;
             }
             html, body, #map {
                 height: 100%;
                 width: 100%;
             }
-        </style>
+      </style>
     </head>
     <body>
 
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container-fluid" style="margin-left: 10px; padding: 0px;">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#"><span><img src="/images/logo24.png"/>&nbsp;</span>Track-Display</a>
-          <!--
-	  <form class="navbar-form navbar-left" role="search">
-	    <div class="form-group">
-	      <input type="text" class="form-control" placeholder="MMSI">
-	    </div>
-	    <button type="submit" class="btn btn-default">Submit</button>
- 	  </form>
- 	  -->
-        </div> 
-      </div>
-    </nav>
- 
+    <track-display></track-display>
 
-    <div class="container-fluid" style="width: 100%; height: 100%; margin: 0px; padding: 0px;">
-      <div class="row" style="width: 100%; height:100%; margin: 0px;">
- <!--       <div class="col-md-3" style="height:100%; padding: 0px;">
-	  <track-list selected="selectedContact"></track-list>
-	</div> -->
-        <div class="col-md-9" style="height:100%; padding: 0px;">
-          <track-map mapcenter="mapCenter" selected="selectedContact"></track-map>
-	</div>
-        <div class="col-md-3" style="height:100%; padding: 0px;">
-	  <track-info mapcenter="mapCenter" selected="selectedContact"></track-info>
-	</div>
-      </div>
-<!--      <div class="row" style="width: 100%; height:25%; margin: 0px;">
-        <div class="col-md-3" style="height:100%; padding: 0px;">
-        xxx
-	</div>
-        <div class="col-md-3" style="height:100%; padding: 0px;">
-        yyy
-	</div>
-        <div class="col-md-3" style="height:100%; padding: 0px;">
-        yyy
-	</div>
-        <div class="col-md-3" style="height:100%; padding: 0px;">
-        zzz
-	</div>
-      </div> -->
-    </div>
+    <script src="components/jquery/dist/jquery.min.js"></script>
+    <script src="components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="components/angularjs/angular.js"></script>
+    <script src="components/angular-route/angular-route.js"></script>
+    <script src="components/angular-websocket/angular-websocket.js"></script>
+    <script src="components/angular-bootstrap/ui-bootstrap.js"></script>
+    <script src="components/leaflet/dist/leaflet.js"></script>
+    <script src="components/leaflet-tracksymbol/leaflet-tracksymbol.js"></script>
+    <script src="components/leaflet-tracksymbol/leaflet-tracklayer.js"></script>
+    <script src="components/lethexa-units/lethexa-units.js"></script>
 
-
-    <nav class="navbar navbar-default navbar-fixed-bottom">
-      <div class="container-fluid">
-        <div class="navbar-header">
-	    <a target="_blank" href="https://github.com/lethexa"> Copyright &copy; 2015-2016 by lethexa </a>
-        </div>
-
-        <ul class="nav navbar-nav">
-        </ul>
-
-      </div>
-    </nav>
-
-
-
-
-      <script src="components/jquery/dist/jquery.min.js"></script>
-      <script src="components/bootstrap/dist/js/bootstrap.min.js"></script>
-      <script src="components/angularjs/angular.js"></script>
-      <script src="components/angular-route/angular-route.js"></script>
-      <script src="components/angular-websocket/angular-websocket.js"></script>
-      <script src="components/angular-bootstrap/ui-bootstrap.js"></script>
-      <script src="components/leaflet/dist/leaflet.js"></script>
-      <script src="components/leaflet-tracksymbol/leaflet-tracksymbol.js"></script>
-      <script src="components/leaflet-tracksymbol/leaflet-tracklayer.js"></script>
-      <script src="components/lethexa-units/lethexa-units.js"></script>
-
-      <!-- The app -->
-      <script src="track-api/track-api.js"></script>
-      <script src="trackmap/trackmap.js"></script>
-      <script src="trackinfo/trackinfo.js"></script>
-      <script src="tracklist/tracklist.js"></script>
-      <script src="trackdisplay/trackdisplay.js"></script>
-    </body>
+    <!-- The app -->
+    <script src="track-api/track-api.js"></script>
+    <script src="trackmessage/trackmessage.js"></script>
+    <script src="tracksearch/tracksearch.js"></script>
+    <script src="trackmap/trackmap.js"></script>
+    <script src="trackinfo/trackinfo.js"></script>
+    <script src="tracklist/tracklist.js"></script>
+    <script src="trackdisplay/trackdisplay.js"></script>
+  </body>
 </html>
