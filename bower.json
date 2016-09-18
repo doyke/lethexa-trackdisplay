@@ -31,6 +31,6 @@
     "jquery": "~2.1.4",
     "leaflet": "~0.7.5",
     "leaflet-tracksymbol": "^1.0.5",
-    "lethexa-units": "^0.0.6"
+    "lethexa-units": "^1.0.2"
   }
 }
