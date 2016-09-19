@@ -23,11 +23,13 @@
     
     var map = L.map('map').setView([53.5, 8.125], 10);
     L.tileLayer(openStreetMapUrl, {
-      minZoom: 3
+      minZoom: 3,
+      attribution: 'Background map &copy; <a href="osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
     L.tileLayer(openSeaMapmUrl, {
-      minZoom: 3
+      minZoom: 3,
+      attribution: 'Overlay map &copy; <a href="http://openseamap.org">OpenSeaMap</a> contributors'
     }).addTo(map);
 
     var trackPicture = {};
