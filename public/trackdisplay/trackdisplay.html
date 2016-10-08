@@ -1,38 +1,38 @@
 <div style="width: 100%; height: 100%;">
     <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container-fluid" style="margin-left: 10px; padding: 0px;">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#"><span><img src="/images/logo24.png"/>&nbsp;</span>Track-Display</a>
-        </div> 
-        <track-search mapcenter="mapCenter" selected="selectedContact"></track-search>
-      </div>
+        <div class="container-fluid" style="margin-left: 10px; padding: 0px;">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#"><span><img src="/images/logo24.png"/>&nbsp;</span>Track-Display</a>
+            </div> 
+            <track-search mapcenter="mapCenter" selected="selectedContact"></track-search>
+        </div>
     </nav>
 
     <div class="container-fluid" style="width: 100%; height: 100%; margin: 0px; padding: 0px;">
-      <div class="row" style="width: 100%; height:100%; margin: 0px;">
-        <div class="col-md-9" style="height:100%; padding: 0px;">
-          <track-map mapcenter="mapCenter" selected="selectedContact"></track-map>
+        <div class="row" style="width: 100%; height:100%; margin: 0px;">
+            <div class="col-md-9" style="height:100%; padding: 0px;">
+                <track-map mapcenter="mapCenter" selected="selectedContact"></track-map>
+            </div>
+            <div class="col-md-3" style="height:100%; padding: 0px;">
+                <ul class="nav nav-tabs">
+                    <li role="presentation" ng-class="{'active': tabName === 'tab1'}" ng-click="tabName = 'tab1'"><a href="#">Track</a></li>
+                    <li role="presentation" ng-class="{'active': tabName === 'tab2'}" ng-click="tabName = 'tab2'"><a href="#">Messages</a></li>
+                </ul>   
+                <div>
+                    <div ng-show="tabName === 'tab1'"><track-info mapcenter="mapCenter" selected="selectedContact"></track-info></div>
+                    <div ng-show="tabName === 'tab2'"><track-message></track-message></div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-3" style="height:100%; padding: 0px;">
-        <ul class="nav nav-tabs">
-          <li role="presentation" ng-class="{'active': tabName=='tab1'}" ng-click="tabName='tab1'"><a href="#">Track</a></li>
-          <li role="presentation" ng-class="{'active': tabName=='tab2'}" ng-click="tabName='tab2'"><a href="#">Messages</a></li>
-        </ul>   
-        <div>
-          <div ng-show="tabName=='tab1'"><track-info mapcenter="mapCenter" selected="selectedContact"></track-info></div>
-          <div ng-show="tabName=='tab2'"><track-message></track-message></div>
-        </div>
-      </div>
+
+        <nav class="navbar navbar-default navbar-fixed-bottom">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a target="_blank" href="https://github.com/lethexa"> Copyright &copy; 2015-2016 by lethexa </a>
+                </div>
+
+                <ul class="nav navbar-nav">
+                </ul>
+            </div>
+        </nav>
     </div>
-
-    <nav class="navbar navbar-default navbar-fixed-bottom">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a target="_blank" href="https://github.com/lethexa"> Copyright &copy; 2015-2016 by lethexa </a>
-        </div>
-
-        <ul class="nav navbar-nav">
-        </ul>
-      </div>
-    </nav>
-</div>

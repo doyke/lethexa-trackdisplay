@@ -1,7 +1,6 @@
 (function() {
 
   var trackInfo = angular.module('trackList', [
-    'trackAPI'
   ]);
 
   trackInfo.directive('trackList', function() {
@@ -16,9 +15,9 @@
     };
   });
 
-  trackInfo.controller('TrackListCtrl', function($scope, $trackAPI) {
+  trackInfo.controller('TrackListCtrl', ['$scope', function($scope) {
 
-  });
+  }]);
 
 }());
 

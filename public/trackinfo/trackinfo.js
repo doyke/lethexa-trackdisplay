@@ -1,7 +1,8 @@
+/* global units */
+
 (function() {
 
   var trackInfo = angular.module('trackInfo', [
-    'trackAPI'
   ]);
 
   trackInfo.directive('trackInfo', function() {
@@ -17,7 +18,7 @@
     };
   });
 
-  trackInfo.controller('TrackInfoCtrl', function($scope, $trackAPI) {
+  trackInfo.controller('TrackInfoCtrl', ['$scope', function($scope) {
 
     $scope.recenter = function() {
       console.log('trackInfo:center');
@@ -36,7 +37,7 @@
     };
 
     $scope.cvtTime = function(value) {
-      if(value == undefined)
+      if(value === undefined)
 	return undefined;
       var date = new Date(value);
       return date.toString();
@@ -51,41 +52,41 @@
       if(lon !== undefined) {
         lonString = units.LONGITUDE.asString(lon);
       }
-      return latString + ', ' + lonString
+      return latString + ', ' + lonString;
     };
 
     $scope.cvtLatitude = function(value) {
-      if(value == undefined)
+      if(value === undefined)
 	return undefined;
       return units.LATITUDE.asString(value);
     };
 
     $scope.cvtLongitude = function(value) {
-      if(value == undefined)
+      if(value === undefined)
 	return undefined;
       return units.LONGITUDE.asString(value);
     };
     
     $scope.cvtRoteOfTurn = function(value) {
-      if(value == undefined)
+      if(value === undefined)
 	return undefined;
       return units.ROTSPEED.asString(value);
     };
     
     $scope.cvtDirection = function(value) {
-      if(value == undefined)
+      if(value === undefined)
 	return undefined;
       return units.DIRECTION.asString(value);
     };
     
     $scope.cvtSpeed = function(value) {
-      if(value == undefined)
+      if(value === undefined)
 	return undefined;
       return units.SPEED.asString(value * 0.514444);
     };
     
     $scope.cvtLength = function(value) {
-      if(value == undefined)
+      if(value === undefined)
 	return undefined;
       return units.LENGTH.asString(value);
     };
@@ -107,7 +108,7 @@
       return generalString.toUpperCase() +  ', ' + categoryString.toUpperCase() + ', ' + specificString.toUpperCase();
     };
 
-  });
+  }]);
 
 }());
 

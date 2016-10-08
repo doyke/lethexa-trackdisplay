@@ -17,9 +17,9 @@
     };
   });
 
-  app.controller('TrackDisplayCtrl', function($scope) {
+  app.controller('TrackDisplayCtrl', ['$scope', function($scope) {
     $scope.tabName = "tab1";
-  });
+  }]);
 
 }());
 
