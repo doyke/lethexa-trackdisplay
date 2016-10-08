@@ -12,7 +12,7 @@
     return {
       restrict: 'E',
       replace: true,
-      templateUrl: 'trackdisplay/trackdisplay.html',
+      templateUrl: 'track-display/track-display.html',
       controller: 'TrackDisplayCtrl'
     };
   });

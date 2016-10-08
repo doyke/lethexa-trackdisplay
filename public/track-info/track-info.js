@@ -13,7 +13,7 @@
         selected: '=',
 	mapcenter: '='
       },
-      templateUrl: 'trackinfo/trackinfo.html',
+      templateUrl: 'track-info/track-info.html',
       controller: 'TrackInfoCtrl'
     };
   });

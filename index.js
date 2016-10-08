@@ -34,7 +34,7 @@ var WebSocketServer = require('websocket').server;
 var MsgQueue = require('./lib/msgqueue').MsgQueue;
 
 var connections = [];
-var mq = new MsgQueue('simulator', { 
+var mq = new MsgQueue('trackdisplay', { 
   exchange: 'simulator',
   topics: ['sim.tracks.*']
 });

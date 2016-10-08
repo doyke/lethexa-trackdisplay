@@ -9,7 +9,7 @@
       require: 'E',
       replace: true,
       controller: 'TrackMapCtrl',
-      templateUrl: 'trackmap/trackmap.html',
+      templateUrl: 'track-map/track-map.html',
       scope: {
         selected: "=",
         mapcenter: "="

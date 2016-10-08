@@ -10,7 +10,7 @@
       replace: true,
       scope: {
       },
-      templateUrl: 'trackmessage/trackmessage.html',
+      templateUrl: 'track-message/track-message.html',
       controller: 'TrackMessageCtrl'
     };
   });

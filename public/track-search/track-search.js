@@ -12,7 +12,7 @@
         selected: '=',
 	mapcenter: '='
       },
-      templateUrl: 'tracksearch/tracksearch.html',
+      templateUrl: 'track-search/track-search.html',
       controller: 'TrackSearchCtrl'
     };
   });

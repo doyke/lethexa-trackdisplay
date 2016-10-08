@@ -10,7 +10,7 @@
       scope: {
         selected: '='
       },
-      templateUrl: 'tracklist/tracklist.html',
+      templateUrl: 'track-list/track-list.html',
       controller: 'TrackListCtrl'
     };
   });
