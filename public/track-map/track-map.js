@@ -15,7 +15,7 @@
             scope: {
                 selected: '=?',
                 mapcenter: '=?',
-                filterTrackId: '=?'
+                trackFilter: '=?'
             }
         };
     });
@@ -59,8 +59,8 @@
                 updateHistoryPath(track.trackId);
             });
             
-            $scope.$watch('filterTrackId', function (trackIdList) {
-                if (trackIdList === undefined)
+            $scope.$watch('trackFilter', function (trackFilter) {
+                if (trackFilter === undefined)
                     return;
                 // TODO: filter by color...
             });
