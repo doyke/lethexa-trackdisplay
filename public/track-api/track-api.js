@@ -42,7 +42,17 @@
     
     return {
       fetchTrackFor: function(trackId, callback) {
-        $http.get('/track/' + trackId).then(
+        $http.get('/track/id/' + trackId).then(
+          function successCallback(response) {
+            callback(response.data);
+          },
+          function errorCallback(response) {
+          }
+        );
+      },
+
+      fetchTrackByName: function(name, callback) {
+        $http.get('/track/name/' + name).then(
           function successCallback(response) {
             callback(response.data);
           },
