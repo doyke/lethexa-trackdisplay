@@ -39,8 +39,32 @@
     
     connect();
        
+            
+    var isTrackInTrackIdList = function(track, trackIdList) {
+        if(!trackIdList)
+            return true;
+        return trackIdList.indexOf(track.trackId) >= 0;
+    };
+
+    var isTrackInArea = function(track, area) {
+        if(!area)
+            return true;
+        var pos1 = area[0];
+        var pos2 = area[1];
+        return (track.lat >= pos1.lat) && (track.lat <= pos2.lat) && (track.lon >= pos1.lon) && (track.lon <= pos2.lon);
+    };
     
     return {
+        isTrackFilteredOut: function(track, trackFilter) {
+            if(!trackFilter)
+                return false;
+            if(!isTrackInArea(track, trackFilter.area))
+                return true;
+            if(!isTrackInTrackIdList(track, trackFilter.trackIdList))
+                return true;
+            return false;
+        },
+        
       fetchTrackFor: function(trackId, callback) {
         if(isNaN(trackId)) {
             $http.get('/track/name/' + trackId).then(

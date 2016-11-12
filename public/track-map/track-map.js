@@ -23,7 +23,12 @@
     trackMap.controller('TrackMapCtrl', ['$scope', '$trackAPI', function ($scope, $trackAPI) {
             var openStreetMapUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
             var openSeaMapmUrl = 'https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png';
-
+/*
+            $scope.trackFilter = {
+                trackIdList: [565589000, 236342000],
+                area: [{lat: 53.25, lon: 8.125}, {lat: 53.75, lon: 8.25}]
+            };
+*/
             var map = L.map('map').setView([53.5, 8.125], 10);
             L.tileLayer(openStreetMapUrl, {
                 minZoom: 3,
@@ -62,9 +67,42 @@
             $scope.$watch('trackFilter', function (trackFilter) {
                 if (trackFilter === undefined)
                     return;
-                // TODO: filter by color...
+                refilterAll();
             });
             
+            var applyFilterToTrackMarker = function(trackMarker, track) {
+                if($trackAPI.isTrackFilteredOut(track, $scope.trackFilter)) {
+                    trackMarker.setStyle({
+                        fill: true,
+                        fillColor: '#ffffff',
+                        fillOpacity: 0.25,
+                        stroke: true,
+                        color: '#000000',
+                        opacity: 0.25,
+                        weight: 1.0
+                    });
+                }
+                else {
+                    trackMarker.setStyle({
+                        fill: true,
+                        fillColor: track.color.fill, 
+                        fillOpacity: 1.0,
+                        stroke: true,
+                        color: track.color.line,
+                        opacity: 0.5,
+                        weight: 1.0
+                    });
+                }
+            };
+            
+            var refilterAll = function() {
+                for (var trackId in trackPicture) {
+                    if (trackPicture.hasOwnProperty(trackId)) {
+                        var trackMarker = trackPicture[trackId];
+                        applyFilterToTrackMarker(trackMarker, trackMarker.track);
+                    }
+                }
+            };
 
             var updateSelectedTrackBy = function (track) {
                 var newTrack = {};
@@ -134,6 +172,7 @@
                         heading: track.heading === null ? undefined : track.heading
                     });
                     trackMarker.track = track;
+                    applyFilterToTrackMarker(trackMarker, track);
                     trackMarker.on('click', function (event) {
                         var marker = event.target;
                         //console.log('marker', marker);
@@ -157,7 +196,7 @@
                         trackMarker.setLatLng(L.latLng(track.lat, track.lon));
                     }
                     trackMarker.track = track;
-                    trackMarker.setStyle({fillColor: track.color.fill, color: track.color.line});
+                    applyFilterToTrackMarker(trackMarker, track);
                     trackMarker.setSpeed(track.speed);
                     trackMarker.setCourse(track.course);
                     trackMarker.setHeading(track.heading);
@@ -170,8 +209,8 @@
                         $scope.selected = updateSelectedTrackBy(trackMarker.track);
                         //updateHistoryPath(track.trackId);
                     }
-
                 }
+                
             });
 
         }]);
