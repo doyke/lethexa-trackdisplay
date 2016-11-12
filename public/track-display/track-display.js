@@ -1,6 +1,7 @@
 (function() {
 
   var app = angular.module('trackDisplay', [
+    'trackAPI',
     'trackMap',
     'trackList',
     'trackInfo',
@@ -17,7 +18,20 @@
     };
   });
 
-  app.controller('TrackDisplayCtrl', ['$scope', function($scope) {
+  app.controller('TrackDisplayCtrl', ['$scope', '$trackAPI', function($scope, $trackAPI) {
+    $('#networkProblemDialog').modal({
+        backdrop: 'static',
+        keyboard: false 
+    });
+
+    $trackAPI.addListenerFor('ws-connected', function() {
+        $('#networkProblemDialog').modal('hide');
+    });
+
+    $trackAPI.addListenerFor('ws-disconnected', function() {
+        $('#networkProblemDialog').modal('show');
+    });
+    
     $scope.tabName = "tab1";
   }]);
 

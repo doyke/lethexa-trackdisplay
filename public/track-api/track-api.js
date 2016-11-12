@@ -3,7 +3,7 @@
     'ngWebSocket'
   ]);
 
-  trackAPI.factory('$trackAPI', ['$websocket', '$http', function($websocket, $http) {
+  trackAPI.factory('$trackAPI', ['$websocket', '$http', '$window', function($websocket, $http, $window) {
     var listenerMap = {};
 
     var notifyListenersFor = function(msgType, msg) {
@@ -16,10 +16,11 @@
     };
 
     var connect = function() {
-      var trackStream = $websocket('ws://' + window.location.host + '/', 'tracks');
+      var trackStream = $websocket('ws://' + $window.location.host + '/', 'tracks');
       
       trackStream.onOpen(function() {
         console.log('Websocket opened');
+        notifyListenersFor('ws-connected');
       });
 
       trackStream.onMessage(function(message) {
@@ -29,9 +30,10 @@
 
       trackStream.onClose(function() {
         console.log('Websocket closed');
+        notifyListenersFor('ws-disconnected');
         setTimeout(function() {
           connect();
-        }, 100);
+        }, 1000);
       });
     };
     
@@ -40,10 +42,7 @@
     
     return {
       fetchTrackFor: function(trackId, callback) {
-        $http({
-          method: 'GET',
-          url: '/track/' + trackId
-        }).then(
+        $http.get('/track/' + trackId).then(
           function successCallback(response) {
             callback(response.data);
           },
@@ -53,10 +52,7 @@
       },
 
       fetchHistoryPathFor: function(trackId, callback) {
-        $http({
-          method: 'GET',
-          url: '/trackhistory/' + trackId
-        }).then(
+        $http.get('/trackhistory/' + trackId).then(
           function successCallback(response) {
             callback(response.data);
           },
