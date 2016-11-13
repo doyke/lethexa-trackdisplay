@@ -10,6 +10,12 @@
                 return trackIdList.indexOf(track.trackId) >= 0;
             };
 
+            var isTrackNameFound = function (track, trackName) {
+                if (!trackName)
+                    return true;
+                return trackName === track.name;
+            };
+
             var isTrackInArea = function (track, area) {
                 if (!area)
                     return true;
@@ -25,6 +31,8 @@
                     if (!isTrackInArea(track, trackFilter.area))
                         return true;
                     if (!isTrackInTrackIdList(track, trackFilter.trackIdList))
+                        return true;
+                    if(!isTrackNameFound(track, trackFilter.trackName))
                         return true;
                     return false;
                 },
