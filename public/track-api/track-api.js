@@ -13,7 +13,9 @@
             var isTrackNameFound = function (track, trackName) {
                 if (!trackName)
                     return true;
-                return trackName === track.name;
+                if (!track.name)
+                    return false;
+                return track.name.indexOf(trackName) === 0;
             };
 
             var isTrackInArea = function (track, area) {
