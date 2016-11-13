@@ -1,132 +1,78 @@
-(function() {
-  var trackAPI = angular.module('trackAPI', [
-    'ngWebSocket'
-  ]);
+(function () {
+    var trackAPI = angular.module('trackAPI', [
+        'wsAPI'
+    ]);
 
-  trackAPI.factory('$trackAPI', ['$websocket', '$http', '$window', function($websocket, $http, $window) {
-    var listenerMap = {};
+    trackAPI.factory('$trackAPI', ['$wsAPI', '$http', function ($wsAPI, $http) {
+            var isTrackInTrackIdList = function (track, trackIdList) {
+                if (!trackIdList)
+                    return true;
+                return trackIdList.indexOf(track.trackId) >= 0;
+            };
 
-    var notifyListenersFor = function(msgType, msg) {
-      var foundList = listenerMap[msgType];
-      if(foundList !== undefined) {
-        foundList.forEach(function(callback) {
-          callback(msg);
-        });
-      }
-    };
+            var isTrackInArea = function (track, area) {
+                if (!area)
+                    return true;
+                var pos1 = area[0];
+                var pos2 = area[1];
+                return (track.lat >= pos1.lat) && (track.lat <= pos2.lat) && (track.lon >= pos1.lon) && (track.lon <= pos2.lon);
+            };
 
-    var connect = function() {
-      var trackStream = $websocket('ws://' + $window.location.host + '/', 'tracks');
-      
-      trackStream.onOpen(function() {
-        console.log('Websocket opened');
-        notifyListenersFor('ws-connected');
-      });
+            return {
+                isTrackFilteredOut: function (track, trackFilter) {
+                    if (!trackFilter)
+                        return false;
+                    if (!isTrackInArea(track, trackFilter.area))
+                        return true;
+                    if (!isTrackInTrackIdList(track, trackFilter.trackIdList))
+                        return true;
+                    return false;
+                },
 
-      trackStream.onMessage(function(message) {
-        var msg = JSON.parse(message.data);
-        notifyListenersFor(msg.header.type, msg);
-      });
+                fetchTrackFor: function (trackId, callback) {
+                    if (isNaN(trackId)) {
+                        $http.get('/track/name/' + trackId).then(
+                                function successCallback(response) {
+                                    callback(response.data);
+                                },
+                                function errorCallback(response) {
+                                }
+                        );
+                    } else {
+                        $http.get('/track/id/' + trackId).then(
+                                function successCallback(response) {
+                                    callback(response.data);
+                                },
+                                function errorCallback(response) {
+                                }
+                        );
+                    }
+                },
 
-      trackStream.onClose(function() {
-        console.log('Websocket closed');
-        notifyListenersFor('ws-disconnected');
-        setTimeout(function() {
-          connect();
-        }, 1000);
-      });
-    };
-    
-    connect();
-       
-            
-    var isTrackInTrackIdList = function(track, trackIdList) {
-        if(!trackIdList)
-            return true;
-        return trackIdList.indexOf(track.trackId) >= 0;
-    };
+                fetchTrackByName: function (name, callback) {
+                    $http.get('/track/name/' + name).then(
+                            function successCallback(response) {
+                                callback(response.data);
+                            },
+                            function errorCallback(response) {
+                            }
+                    );
+                },
 
-    var isTrackInArea = function(track, area) {
-        if(!area)
-            return true;
-        var pos1 = area[0];
-        var pos2 = area[1];
-        return (track.lat >= pos1.lat) && (track.lat <= pos2.lat) && (track.lon >= pos1.lon) && (track.lon <= pos2.lon);
-    };
-    
-    return {
-        isTrackFilteredOut: function(track, trackFilter) {
-            if(!trackFilter)
-                return false;
-            if(!isTrackInArea(track, trackFilter.area))
-                return true;
-            if(!isTrackInTrackIdList(track, trackFilter.trackIdList))
-                return true;
-            return false;
-        },
-        
-      fetchTrackFor: function(trackId, callback) {
-        if(isNaN(trackId)) {
-            $http.get('/track/name/' + trackId).then(
-              function successCallback(response) {
-                callback(response.data);
-              },
-              function errorCallback(response) {
-              }
-            );
-        }
-        else {
-            $http.get('/track/id/' + trackId).then(
-              function successCallback(response) {
-                callback(response.data);
-              },
-              function errorCallback(response) {
-              }
-            );
-        }
-      },
+                fetchHistoryPathFor: function (trackId, callback) {
+                    $http.get('/trackhistory/' + trackId).then(
+                            function successCallback(response) {
+                                callback(response.data);
+                            },
+                            function errorCallback(response) {
+                            }
+                    );
+                },
 
-      fetchTrackByName: function(name, callback) {
-        $http.get('/track/name/' + name).then(
-          function successCallback(response) {
-            callback(response.data);
-          },
-          function errorCallback(response) {
-          }
-        );
-      },
+                addListenerFor: $wsAPI.addListenerFor,
+                removeListenerFor: $wsAPI.removeListenerFor
 
-      fetchHistoryPathFor: function(trackId, callback) {
-        $http.get('/trackhistory/' + trackId).then(
-          function successCallback(response) {
-            callback(response.data);
-          },
-          function errorCallback(response) {
-          }
-        );
-      },
-      
-      addListenerFor: function(msgType, callback) {
-        var foundList = listenerMap[msgType];
-        if(foundList === undefined) {
-          foundList = [];
-          listenerMap[msgType] = foundList;
-        }
-        foundList.push(callback);
-      },
-
-      removeListenerFor: function(msgType, callback) {
-        var foundList = listenerMap[msgType];
-        if(foundList !== undefined) {
-          var index = foundList.indexOf(callback);
-          foundList.splice(index, 1);
-          if(foundList.length === 0) {
-            listenerMap[msgType] = undefined;
-          }
-        }
-      }
-     
-    };
-  }]);
+            };
+        }]);
 
 }());
