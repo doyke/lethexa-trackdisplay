@@ -16,7 +16,7 @@
             };
 
             var connect = function () {
-                var trackStream = $websocket('ws://' + $window.location.host + '/', 'tracks');
+                var trackStream = $websocket('ws://' + $window.location.host + '/', 'echo-protocol');
 
                 trackStream.onOpen(function () {
                     console.log('Websocket opened');
@@ -25,7 +25,7 @@
 
                 trackStream.onMessage(function (message) {
                     var msg = JSON.parse(message.data);
-                    notifyListenersFor(msg.header.type, msg);
+                    notifyListenersFor(msg.header.type, msg.data);
                 });
 
                 trackStream.onClose(function () {

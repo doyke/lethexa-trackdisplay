@@ -32,10 +32,21 @@ trackservice.registerService(app, trackPicture);
 historyservice.registerService(app, trackHistory);
 
 
+var createMsg = function(type, data) {
+    var msg = {
+        header: {
+            type: type
+        },
+        data: data
+    };
+    return msg;
+};
+
 var webSocket = new wssvc.WebsocketService(httpServer);
 webSocket.on('connected', function(connection) {
+    webSocket.sendMessageTo(connection, createMsg('clear-picture', {}));
     trackPicture.provideTracksOn(function (track) {
-        connection.sendUTF(JSON.stringify(track));
+        webSocket.sendMessageTo(connection, createMsg('track-update', track));
     });
 });
 
@@ -48,9 +59,9 @@ var mq = new MsgQueue('trackdisplay', {
 mq.initialize();
 mq.on('data', function(routingKey, msg) {
   var jsonMsg = JSON.parse(msg);
-  if(jsonMsg.header.type === 'track') {
-    trackPicture.saveTrack(jsonMsg);
-    trackHistory.saveTrack(jsonMsg);
+  if(jsonMsg.header.type === 'track-update') {
+    trackPicture.saveTrack(jsonMsg.data);
+    trackHistory.saveTrack(jsonMsg.data);
   }
-  webSocket.sendToAll(msg);
+  webSocket.sendMessageToAll(jsonMsg);
 });

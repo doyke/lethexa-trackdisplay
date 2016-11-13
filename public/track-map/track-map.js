@@ -23,6 +23,7 @@
     trackMap.controller('TrackMapCtrl', ['$scope', '$trackAPI', function ($scope, $trackAPI) {
             var openStreetMapUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
             var openSeaMapmUrl = 'https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png';
+            
 /*
             $scope.trackFilter = {
                 trackIdList: [565589000, 236342000],
@@ -147,8 +148,12 @@
                     historyPath.setLatLngs(linePoints);
                 });
             };
+            
+            $trackAPI.addListenerFor('clear-picture', function() {
+                console.log('clear-picture');
+            });
 
-            $trackAPI.addListenerFor('track', function (track) {
+            $trackAPI.addListenerFor('track-update', function (track) {
 
                 if (trackPicture[track.trackId] === undefined) {
 
