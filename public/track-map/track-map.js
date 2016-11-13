@@ -42,7 +42,7 @@
             }).addTo(map);
 
             var trackPicture = {};
-            var trackLayer = L.trackLayer();
+            var trackLayer = L.featureGroup([]);
             trackLayer.addTo(map);
 
             var createPopupContent = function (track) {
@@ -150,7 +150,22 @@
             };
             
             $trackAPI.addListenerFor('clear-picture', function() {
-                console.log('clear-picture');
+//                console.log('clear-picture');
+                for(var trackId in trackPicture) {
+                    if(trackPicture.hasOwnProperty(trackId)) {
+                        var trackMarker = trackPicture[trackId];
+                        trackLayer.removeLayer(trackMarker);
+                        delete trackPicture[trackId];
+                    }
+                }
+            });
+
+            $trackAPI.addListenerFor('track-remove', function(track) {
+//                console.log('track-remove', track.trackId);
+                var trackMarker = trackPicture[track.trackId];
+                if(trackMarker) {
+                    trackLayer.removeLayer(trackMarker);
+                }
             });
 
             $trackAPI.addListenerFor('track-update', function (track) {
@@ -188,12 +203,8 @@
                         });
                     });
 
-                    // trackMarker.bindPopup('');
-                    // trackMarker.on('popupopen', function() {
-                    //   trackMarker._popup.setContent(createPopupContent(track));
-                    // });
                     trackPicture[track.trackId] = trackMarker;
-                    trackLayer.addTrack(trackMarker);
+                    trackMarker.addTo(trackLayer);
                 } else {
                     var trackMarker = trackPicture[track.trackId];
 
