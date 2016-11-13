@@ -27,16 +27,18 @@
     <div class="container-fluid" style="width: 100%; height: 100%; margin: 0px; padding: 0px;">
         <div class="row" style="width: 100%; height:100%; margin: 0px;">
             <div class="col-md-9" style="height:100%; padding: 0px;">
-                <track-map mapcenter="mapCenter" selected="selectedContact"></track-map>
+                <track-map mapcenter="mapCenter" selected="selectedContact" track-filter="trackFilter"></track-map>
             </div>
             <div class="col-md-3" style="height:100%; padding: 0px;">
                 <ul class="nav nav-tabs">
                     <li role="presentation" ng-class="{'active': tabName === 'tab1'}" ng-click="tabName = 'tab1'"><a href="#">Track</a></li>
                     <li role="presentation" ng-class="{'active': tabName === 'tab2'}" ng-click="tabName = 'tab2'"><a href="#">Messages</a></li>
+                    <li role="presentation" ng-class="{'active': tabName === 'tab3'}" ng-click="tabName = 'tab3'"><a href="#">Filter</a></li>
                 </ul>   
                 <div>
                     <div ng-show="tabName === 'tab1'"><track-info mapcenter="mapCenter" selected="selectedContact"></track-info></div>
                     <div ng-show="tabName === 'tab2'"><track-message></track-message></div>
+                    <div ng-show="tabName === 'tab3'"><track-filter track-filter="trackFilter"></track-filter></div>
                 </div>
             </div>
         </div>

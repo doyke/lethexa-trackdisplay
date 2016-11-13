@@ -66,10 +66,10 @@
             });
             
             $scope.$watch('trackFilter', function (trackFilter) {
-                if (trackFilter === undefined)
+                if (!trackFilter)
                     return;
                 refilterAll();
-            });
+            }, true);
             
             var applyFilterToTrackMarker = function(trackMarker, track) {
                 if($trackAPI.isTrackFilteredOut(track, $scope.trackFilter)) {

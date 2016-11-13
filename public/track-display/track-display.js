@@ -5,6 +5,7 @@
     'trackMap',
     'trackList',
     'trackInfo',
+    'trackFilter',
     'trackMessage',
     'trackSearch'
   ]);
