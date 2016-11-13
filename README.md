@@ -10,7 +10,7 @@ to topic 'sim.tracks.xyz':
 
 	{
             header: {
-                type: 'track'
+                type: 'track-update'
             },
             data: {
 		"firstctc":1456515394945,  // [ms]
@@ -20,6 +20,33 @@ to topic 'sim.tracks.xyz':
 		"lon":8.689741666666666,   // Decimal degrees
 		"speed":16.7,              // [m/s]
 		"course":5.88175957922089  // [rad]
+            }
+	}
+
+To remove a track:
+
+	{
+            header: {
+                type: 'track-remove'
+            },
+            data: {
+		"firstctc":1456515394945,  // [ms]
+		"lastctc":1456515394945,   // [ms]
+		"trackId":211317180,       
+		"lat":53.906445,           // Decimal degrees
+		"lon":8.689741666666666,   // Decimal degrees
+		"speed":16.7,              // [m/s]
+		"course":5.88175957922089  // [rad]
+            }
+	}
+
+To clear all tracks:
+
+	{
+            header: {
+                type: 'clear-picture'
+            },
+            data: {
             }
 	}
 
