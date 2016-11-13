@@ -10,8 +10,9 @@
       restrict: 'E',
       replace: true,
       scope: {
-        selected: '=',
-	mapcenter: '='
+        selected: '=?',
+	mapcenter: '=?',
+        trackFilter: '=?'
       },
       templateUrl: 'track-info/track-info.html',
       controller: 'TrackInfoCtrl'
@@ -19,6 +20,14 @@
   });
 
   trackInfo.controller('TrackInfoCtrl', ['$scope', function($scope) {
+
+    $scope.filterByMMSI = function() {
+        if(!$scope.selected)
+            return;
+        $scope.trackFilter = {
+            trackIdList: [$scope.selected.trackId],
+        };
+    };
 
     $scope.recenter = function() {
       console.log('trackInfo:center');

@@ -36,7 +36,7 @@
                     <li role="presentation" ng-class="{'active': tabName === 'tab3'}" ng-click="tabName = 'tab3'"><a href="#">Filter</a></li>
                 </ul>   
                 <div>
-                    <div ng-show="tabName === 'tab1'"><track-info mapcenter="mapCenter" selected="selectedContact"></track-info></div>
+                    <div ng-show="tabName === 'tab1'"><track-info mapcenter="mapCenter" selected="selectedContact" track-filter="trackFilter"></track-info></div>
                     <div ng-show="tabName === 'tab2'"><track-message></track-message></div>
                     <div ng-show="tabName === 'tab3'"><track-filter track-filter="trackFilter"></track-filter></div>
                 </div>

@@ -1,25 +1,27 @@
 /* global units */
 
-(function() {
+(function () {
 
-  var trackFilter = angular.module('trackFilter', [
-  ]);
+    var trackFilter = angular.module('trackFilter', [
+    ]);
 
-  trackFilter.directive('trackFilter', function() {
-    return {
-      restrict: 'E',
-      replace: true,
-      scope: {
-        trackFilter: '='
-      },
-      templateUrl: 'track-filter/track-filter.html',
-      controller: 'TrackFilterCtrl'
-    };
-  });
+    trackFilter.directive('trackFilter', function () {
+        return {
+            restrict: 'E',
+            replace: true,
+            scope: {
+                trackFilter: '='
+            },
+            templateUrl: 'track-filter/track-filter.html',
+            controller: 'TrackFilterCtrl'
+        };
+    });
 
-  trackFilter.controller('TrackFilterCtrl', ['$scope', function($scope) {
-
-  }]);
+    trackFilter.controller('TrackFilterCtrl', ['$scope', function ($scope) {
+            $scope.clearAllFilter = function () {
+                $scope.trackFilter = {};
+            };
+        }]);
 
 }());
 
