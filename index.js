@@ -12,7 +12,7 @@ var trkhist = require('./lib/positionhistory');
 var geojsonservice = require('./lib/geojsonservice');
 var trackservice = require('./lib/trackservice');
 var historyservice = require('./lib/historyservice');
-
+var wssvc = require('./lib/wsservice');
 
 var app = express();
 // this will make Express serve your static files
@@ -32,11 +32,15 @@ trackservice.registerService(app, trackPicture);
 historyservice.registerService(app, trackHistory);
 
 
+var webSocket = new wssvc.WebsocketService(httpServer);
+webSocket.on('connected', function(connection) {
+    trackPicture.provideTracksOn(function (track) {
+        connection.sendUTF(JSON.stringify(track));
+    });
+});
 
-var WebSocketServer = require('websocket').server;
+
 var MsgQueue = require('./lib/msgqueue').MsgQueue;
-
-var connections = [];
 var mq = new MsgQueue('trackdisplay', { 
   exchange: 'simulator',
   topics: ['sim.tracks.*']
@@ -48,32 +52,5 @@ mq.on('data', function(routingKey, msg) {
     trackPicture.saveTrack(jsonMsg);
     trackHistory.saveTrack(jsonMsg);
   }
-  connections.forEach( function(connection) {
-    connection.sendUTF(msg);
-  });
+  webSocket.sendToAll(msg);
 });
-
-
-var wsServer = new WebSocketServer({
-  httpServer: httpServer
-});
-
-wsServer.on('request', function (request) {
-    var connection = request.accept('tracks', request.origin);
-    connections.push(connection);
-    console.log('Connection on websocket accepted...');
-
-    trackPicture.provideTracksOn(function(track) {
-      connection.sendUTF(JSON.stringify(track));
-    });
-    
-    connection.on('message', function (message) {
-//      console.log('message', message.utf8Data);
-    });
-
-    connection.on('close', function(reasonCode, description) {
-      console.log('Connection on websocket closed...');
-      connections.splice(connections.indexOf(connection), 1);
-    });
-});
-
