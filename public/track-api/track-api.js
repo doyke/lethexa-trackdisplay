@@ -15,7 +15,7 @@
                     return true;
                 if (!track.name)
                     return false;
-                return track.name.indexOf(trackName) === 0;
+                return track.name.toLowerCase().indexOf(trackName.toLowerCase()) === 0;
             };
 
             var isTrackInArea = function (track, area) {

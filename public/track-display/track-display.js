@@ -7,7 +7,8 @@
     'trackInfo',
     'trackFilter',
     'trackMessage',
-    'trackSearch'
+    'trackSearch',
+    'waitDialog'
   ]);
 
   app.directive('trackDisplay', function() {
@@ -19,20 +20,20 @@
     };
   });
 
-  app.controller('TrackDisplayCtrl', ['$scope', '$trackAPI', function($scope, $trackAPI) {
-    $('#networkProblemDialog').modal({
-        backdrop: 'static',
-        keyboard: false 
-    });
+  app.controller('TrackDisplayCtrl', ['$scope', '$trackAPI', '$interval', function($scope, $trackAPI, $interval) {
 
-    $trackAPI.addListenerFor('ws-connected', function() {
-        $('#networkProblemDialog').modal('hide');
+    $trackAPI.addListenerFor('ws-connected', function() {        
+        $scope.$apply(function() {
+            $scope.waitVisible = false;
+        });
     });
 
     $trackAPI.addListenerFor('ws-disconnected', function() {
-        $('#networkProblemDialog').modal('show');
+        $scope.$apply(function() {
+            $scope.waitVisible = true;
+        });
     });
-    
+
     $scope.tabName = "tab1";
   }]);
 
