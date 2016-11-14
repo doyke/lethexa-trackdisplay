@@ -13,20 +13,22 @@
             var checkStringExpression = function (trackAttr, value) {
                 if (value === undefined)
                     return true;
+                if (value === '')
+                    return true;
                 if (trackAttr === undefined)
                     return false;
                 return trackAttr.toLowerCase().indexOf(value.toLowerCase()) === 0;
             };
 
             var checkIfExpression = function (trackAttr, expression) {
-                if (trackAttr === undefined)
-                    return false;
-                if (!expression)
+                if (expression === undefined)
                     return true;
                 if (!expression.value)
                     return true;
                 if (!expression.op)
                     return true;
+                if (trackAttr === undefined)
+                    return false;
                 var result = true;
                 if(expression.op === '<')
                     result = trackAttr < expression.value;
@@ -46,24 +48,18 @@
             };
 
             return {
-                isTrackFilteredOut: function (track, trackFilter) {
+                isTrackInFilter: function (track, trackFilter) {
                     if (!trackFilter)
-                        return false;
-                    if (!isTrackInArea(track, trackFilter.area))
                         return true;
-                    if (!isTrackInTrackIdList(track, trackFilter.trackIdList))
-                        return true;
-                    if(!checkStringExpression(track.name, trackFilter.trackName))
-                        return true;
-                    if(!checkStringExpression(track.dest, trackFilter.destination))
-                        return true;
-                    if(!checkIfExpression(track.draught, trackFilter.draught))
-                        return true;
-                    if(!checkIfExpression(track.objlength, trackFilter.length))
-                        return true;
-                    if(!checkIfExpression(track.objbeam, trackFilter.beam))
-                        return true;
-                    return false;
+                    var result = true;
+                    result = result && isTrackInArea(track, trackFilter.area);
+                    result = result && isTrackInTrackIdList(track, trackFilter.trackIdList);
+                    result = result && checkStringExpression(track.name, trackFilter.trackName);
+                    result = result && checkStringExpression(track.dest, trackFilter.destination);
+                    result = result && checkIfExpression(track.draught, trackFilter.draught);
+                    result = result && checkIfExpression(track.objlength, trackFilter.length);
+                    result = result && checkIfExpression(track.objbeam, trackFilter.beam);
+                    return result;
                 },
 
                 fetchTrackFor: function (trackId, callback) {

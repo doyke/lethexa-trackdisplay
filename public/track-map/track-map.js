@@ -72,18 +72,7 @@
             }, true);
             
             var applyFilterToTrackMarker = function(trackMarker, track) {
-                if($trackAPI.isTrackFilteredOut(track, $scope.trackFilter)) {
-                    trackMarker.setStyle({
-                        fill: true,
-                        fillColor: '#ffffff',
-                        fillOpacity: 0.25,
-                        stroke: true,
-                        color: '#000000',
-                        opacity: 0.25,
-                        weight: 1.0
-                    });
-                }
-                else {
+                if($trackAPI.isTrackInFilter(track, $scope.trackFilter)) {
                     trackMarker.setStyle({
                         fill: true,
                         fillColor: track.color.fill, 
@@ -91,6 +80,17 @@
                         stroke: true,
                         color: track.color.line,
                         opacity: 0.5,
+                        weight: 1.0
+                    });
+                }
+                else {
+                    trackMarker.setStyle({
+                        fill: true,
+                        fillColor: '#ffffff',
+                        fillOpacity: 0.25,
+                        stroke: true,
+                        color: '#000000',
+                        opacity: 0.25,
                         weight: 1.0
                     });
                 }
