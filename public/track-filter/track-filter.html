@@ -19,10 +19,24 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 150px;"><label for="trackDraught">Draught:</label></td>
+                    <td style="width: 150px;"><label for="trackDraught">Draught [m]:</label></td>
                     <td>
                         <select ng-options="operator for operator in operators" ng-model="trackFilter.draught.op"></select>
                         <input id="trackDraught" ng-model="trackFilter.draught.value" type="number" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 150px;"><label for="trackLength">Length [m]:</label></td>
+                    <td>
+                        <select ng-options="operator for operator in operators" ng-model="trackFilter.length.op"></select>
+                        <input id="trackLength" ng-model="trackFilter.length.value" type="number" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 150px;"><label for="trackBeam">Beam [m]:</label></td>
+                    <td>
+                        <select ng-options="operator for operator in operators" ng-model="trackFilter.beam.op"></select>
+                        <input id="trackBeam" ng-model="trackFilter.beam.value" type="number" />
                     </td>
                 </tr>
             </table>

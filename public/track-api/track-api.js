@@ -18,22 +18,22 @@
                 return track.name.toLowerCase().indexOf(trackName.toLowerCase()) === 0;
             };
 
-            var isTrackDraught = function (track, draught) {
-                if (!draught)
+            var checkExpression = function (trackAttr, expression) {
+                if (!expression)
                     return true;
-                if (!draught.value)
+                if (!expression.value)
                     return true;
-                if (!draught.op)
+                if (!expression.op)
                     return true;
-                if (!track.draught)
+                if (!trackAttr)
                     return false;
                 var result = true;
-                if(draught.op === '<')
-                    result = track.draught < draught.value;
-                else if(draught.op === '>')
-                    result = track.draught > draught.value;
-                else if(draught.op === '=')
-                    result = track.draught === draught.value;
+                if(expression.op === '<')
+                    result = trackAttr < expression.value;
+                else if(expression.op === '>')
+                    result = trackAttr > expression.value;
+                else if(expression.op === '=')
+                    result = trackAttr === expression.value;
                 return result;
             };
 
@@ -55,7 +55,11 @@
                         return true;
                     if(!isTrackNameFound(track, trackFilter.trackName))
                         return true;
-                    if(!isTrackDraught(track, trackFilter.draught))
+                    if(!checkExpression(track.draught, trackFilter.draught))
+                        return true;
+                    if(!checkExpression(track.objlength, trackFilter.length))
+                        return true;
+                    if(!checkExpression(track.objbeam, trackFilter.beam))
                         return true;
                     return false;
                 },
