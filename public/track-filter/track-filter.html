@@ -18,6 +18,13 @@
                         <input id="trackName" ng-model="trackFilter.trackName" type="text" />
                     </td>
                 </tr>
+                <tr>
+                    <td style="width: 150px;"><label for="trackDraught">Draught:</label></td>
+                    <td>
+                        <select ng-options="operator for operator in operators" ng-model="trackFilter.draught.op"></select>
+                        <input id="trackDraught" ng-model="trackFilter.draught.value" type="number" />
+                    </td>
+                </tr>
             </table>
 
         </div>

@@ -20,7 +20,7 @@
     };
   });
 
-  app.controller('TrackDisplayCtrl', ['$scope', '$trackAPI', '$interval', function($scope, $trackAPI, $interval) {
+  app.controller('TrackDisplayCtrl', ['$scope', '$trackAPI', function($scope, $trackAPI) {
 
     $trackAPI.addListenerFor('ws-connected', function() {        
         $scope.$apply(function() {

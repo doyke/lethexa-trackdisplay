@@ -18,6 +18,25 @@
                 return track.name.toLowerCase().indexOf(trackName.toLowerCase()) === 0;
             };
 
+            var isTrackDraught = function (track, draught) {
+                if (!draught)
+                    return true;
+                if (!draught.value)
+                    return true;
+                if (!draught.op)
+                    return true;
+                if (!track.draught)
+                    return false;
+                var result = true;
+                if(draught.op === '<')
+                    result = track.draught < draught.value;
+                else if(draught.op === '>')
+                    result = track.draught > draught.value;
+                else if(draught.op === '=')
+                    result = track.draught === draught.value;
+                return result;
+            };
+
             var isTrackInArea = function (track, area) {
                 if (!area)
                     return true;
@@ -35,6 +54,8 @@
                     if (!isTrackInTrackIdList(track, trackFilter.trackIdList))
                         return true;
                     if(!isTrackNameFound(track, trackFilter.trackName))
+                        return true;
+                    if(!isTrackDraught(track, trackFilter.draught))
                         return true;
                     return false;
                 },

@@ -21,6 +21,12 @@
             $scope.clearAllFilter = function () {
                 $scope.trackFilter = {};
             };
+            
+            $scope.operators = [
+                '<',
+                '=',
+                '>'
+            ];
         }]);
 
 }());
