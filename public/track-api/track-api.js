@@ -55,6 +55,8 @@
                         return true;
                     if(!checkStringExpression(track.name, trackFilter.trackName))
                         return true;
+                    if(!checkStringExpression(track.dest, trackFilter.destination))
+                        return true;
                     if(!checkIfExpression(track.draught, trackFilter.draught))
                         return true;
                     if(!checkIfExpression(track.objlength, trackFilter.length))
