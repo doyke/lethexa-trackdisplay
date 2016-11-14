@@ -10,23 +10,23 @@
                 return trackIdList.indexOf(track.trackId) >= 0;
             };
 
-            var isTrackNameFound = function (track, trackName) {
-                if (!trackName)
+            var checkStringExpression = function (trackAttr, value) {
+                if (value === undefined)
                     return true;
-                if (!track.name)
+                if (trackAttr === undefined)
                     return false;
-                return track.name.toLowerCase().indexOf(trackName.toLowerCase()) === 0;
+                return trackAttr.toLowerCase().indexOf(value.toLowerCase()) === 0;
             };
 
-            var checkExpression = function (trackAttr, expression) {
+            var checkIfExpression = function (trackAttr, expression) {
+                if (trackAttr === undefined)
+                    return false;
                 if (!expression)
                     return true;
                 if (!expression.value)
                     return true;
                 if (!expression.op)
                     return true;
-                if (!trackAttr)
-                    return false;
                 var result = true;
                 if(expression.op === '<')
                     result = trackAttr < expression.value;
@@ -38,7 +38,7 @@
             };
 
             var isTrackInArea = function (track, area) {
-                if (!area)
+                if (area === undefined)
                     return true;
                 var pos1 = area[0];
                 var pos2 = area[1];
@@ -53,13 +53,13 @@
                         return true;
                     if (!isTrackInTrackIdList(track, trackFilter.trackIdList))
                         return true;
-                    if(!isTrackNameFound(track, trackFilter.trackName))
+                    if(!checkStringExpression(track.name, trackFilter.trackName))
                         return true;
-                    if(!checkExpression(track.draught, trackFilter.draught))
+                    if(!checkIfExpression(track.draught, trackFilter.draught))
                         return true;
-                    if(!checkExpression(track.objlength, trackFilter.length))
+                    if(!checkIfExpression(track.objlength, trackFilter.length))
                         return true;
-                    if(!checkExpression(track.objbeam, trackFilter.beam))
+                    if(!checkIfExpression(track.objbeam, trackFilter.beam))
                         return true;
                     return false;
                 },
