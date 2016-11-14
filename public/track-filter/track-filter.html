@@ -25,6 +25,13 @@
                     </td>
                 </tr>
                 <tr>
+                    <td style="width: 150px;"><label for="trackSpeed">Speed [kt]:</label></td>
+                    <td>
+                        <select ng-options="operator for operator in operators" ng-model="trackFilter.speed.op"></select>
+                        <input id="trackSpeed" ng-model="trackFilter.speed.value" type="number" min="0" max="100" step="1" />
+                    </td>
+                </tr>
+                <tr>
                     <td style="width: 150px;"><label for="trackDraught">Draught [m]:</label></td>
                     <td>
                         <select ng-options="operator for operator in operators" ng-model="trackFilter.draught.op"></select>

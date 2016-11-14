@@ -56,6 +56,7 @@
                     result = result && isTrackInTrackIdList(track, trackFilter.trackIdList);
                     result = result && checkStringExpression(track.name, trackFilter.trackName);
                     result = result && checkStringExpression(track.dest, trackFilter.destination);
+                    result = result && checkIfExpression(track.speed, trackFilter.speed);
                     result = result && checkIfExpression(track.draught, trackFilter.draught);
                     result = result && checkIfExpression(track.objlength, trackFilter.length);
                     result = result && checkIfExpression(track.objbeam, trackFilter.beam);
