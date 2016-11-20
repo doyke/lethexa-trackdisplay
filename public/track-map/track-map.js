@@ -165,6 +165,7 @@
                 var trackMarker = trackPicture[track.trackId];
                 if(trackMarker) {
                     trackLayer.removeLayer(trackMarker);
+                    delete trackPicture[track.trackId];
                 }
             });
 
