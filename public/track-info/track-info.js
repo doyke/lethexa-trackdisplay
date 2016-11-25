@@ -3,6 +3,7 @@
 (function() {
 
   var trackInfo = angular.module('trackInfo', [
+      'trackAPI'
   ]);
 
   trackInfo.directive('trackInfo', function() {
@@ -19,13 +20,20 @@
     };
   });
 
-  trackInfo.controller('TrackInfoCtrl', ['$scope', function($scope) {
+  trackInfo.controller('TrackInfoCtrl', ['$scope', '$trackAPI', function($scope, $trackAPI) {
+
+    $scope.$watch('selected', function(selected) {
+        if(!selected)
+            $scope.countryName = '';
+        else
+            $scope.countryName =  $trackAPI.getCountryFor(selected.country);
+    });
 
     $scope.filterByMMSI = function() {
         if(!$scope.selected)
             return;
         $scope.trackFilter = {
-            trackIdList: [$scope.selected.trackId],
+            trackIdList: [$scope.selected.trackId]
         };
     };
 

@@ -4,15 +4,23 @@
     ]);
 
     trackAPI.factory('$trackAPI', ['$wsAPI', '$http', function ($wsAPI, $http) {
-            
-            $wsAPI.addListenerFor('track-update', function(data) {
+            var countries = {};
+
+            $http.get('/country').then(
+                    function (response) {
+                        countries = response.data;
+                    }
+            );
+
+
+            $wsAPI.addListenerFor('track-update', function (data) {
                 //console.log(data);
             });
 
-            $wsAPI.addListenerFor('track-remove', function(data) {
+            $wsAPI.addListenerFor('track-remove', function (data) {
                 //console.log(data);
             });
-            
+
             var isTrackInTrackIdList = function (track, trackIdList) {
                 if (!trackIdList)
                     return true;
@@ -39,11 +47,11 @@
                 if (trackAttr === undefined)
                     return false;
                 var result = true;
-                if(expression.op === '<')
+                if (expression.op === '<')
                     result = trackAttr < expression.value;
-                else if(expression.op === '>')
+                else if (expression.op === '>')
                     result = trackAttr > expression.value;
-                else if(expression.op === '=')
+                else if (expression.op === '=')
                     result = trackAttr === expression.value;
                 return result;
             };
@@ -110,6 +118,11 @@
                             function errorCallback(response) {
                             }
                     );
+                },
+
+                getCountryFor: function (code) {
+                    code = code ? code.toUpperCase() : 'XX';
+                    return countries[code];
                 },
 
                 addListenerFor: $wsAPI.addListenerFor,
