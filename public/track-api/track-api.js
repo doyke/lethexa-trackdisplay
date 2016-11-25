@@ -4,6 +4,15 @@
     ]);
 
     trackAPI.factory('$trackAPI', ['$wsAPI', '$http', function ($wsAPI, $http) {
+            
+            $wsAPI.addListenerFor('track-update', function(data) {
+                //console.log(data);
+            });
+
+            $wsAPI.addListenerFor('track-remove', function(data) {
+                //console.log(data);
+            });
+            
             var isTrackInTrackIdList = function (track, trackIdList) {
                 if (!trackIdList)
                     return true;
