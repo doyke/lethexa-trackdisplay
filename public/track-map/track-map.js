@@ -137,7 +137,7 @@
             };
 
 
-            var historyPath = L.polyline([], {color: 'blue'}).addTo(map);
+            var historyPath = L.polyline([], {color: 'blue', clickable: false}).addTo(map);
 
             var updateHistoryPath = function (trackId) {
                 $trackAPI.fetchHistoryPathFor(trackId, function (history) {
