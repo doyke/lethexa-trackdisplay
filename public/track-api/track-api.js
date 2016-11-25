@@ -94,7 +94,7 @@
                 },
 
                 fetchHistoryPathFor: function (trackId, callback) {
-                    $http.get('/trackhistory/' + trackId).then(
+                    $http.get('/trackhistory/' + trackId + '/route.json').then(
                             function successCallback(response) {
                                 callback(response.data);
                             },
