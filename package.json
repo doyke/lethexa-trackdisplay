@@ -1,6 +1,6 @@
 {
   "name": "lethexa-trackdisplay",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Provides a leaflet based track picture",
   "main": "index.js",
   "scripts": {
