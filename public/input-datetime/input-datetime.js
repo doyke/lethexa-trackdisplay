@@ -21,11 +21,11 @@
 
     inputDatetime.controller('InputDatetimeCtrl', ['$scope', function ($scope) {
             $scope.$watch('dateModel', function(newDate) {
-                console.log(newDate);
+                //console.log(newDate);
             });
 
             $scope.$watch('timeModel', function(newTime) {
-                console.log(newTime);
+                //console.log(newTime);
             });
             
         }]);

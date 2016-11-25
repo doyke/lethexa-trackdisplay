@@ -28,8 +28,13 @@
             $scope.trackIdList = [];
             
             $scope.startReplay = function() {
-                console.log('start replay');
-                $wsAPI.send('start-replay', { startTime: $scope.startDate, endTime: $scope.endDate, trackIds: $scope.trackIdList});
+                var requestData = { 
+                    startTime: $scope.startTime, 
+                    endTime: $scope.endTime, 
+                    trackIds: $scope.trackIdList
+                };
+                console.log('start replay', requestData);
+                $wsAPI.send('start-replay', requestData);
             };
 
             $scope.pauseReplay = function() {
@@ -40,6 +45,10 @@
             $scope.stopReplay = function() {
                 console.log('stop replay');
                 $wsAPI.send('stop-replay', {});
+            };
+            
+            $scope.exportPicture = function() {
+                
             };
         }]);
 
