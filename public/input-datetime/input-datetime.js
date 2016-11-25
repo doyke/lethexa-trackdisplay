@@ -11,8 +11,8 @@
             replace: true,
             scope: {
                 ngModel: '=?',
-                timePlaceholder: '@',
-                datePlaceholder: '@'
+                placeholderDate: '@',
+                placeholderTime: '@'
             },
             templateUrl: 'input-datetime/input-datetime.html',
             controller: 'InputDatetimeCtrl'
