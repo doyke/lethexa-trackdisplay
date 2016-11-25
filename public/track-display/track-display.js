@@ -8,6 +8,7 @@
     'trackFilter',
     'trackMessage',
     'trackSearch',
+    'replayer',
     'waitDialog'
   ]);
 

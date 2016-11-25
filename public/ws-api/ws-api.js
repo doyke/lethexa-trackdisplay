@@ -5,6 +5,7 @@
 
     wsAPI.factory('$wsAPI', ['$websocket', '$window', function ($websocket, $window) {
             var listenerMap = {};
+            var trackStream;
 
             var notifyListenersFor = function (msgType, msg) {
                 var foundList = listenerMap[msgType];
@@ -16,7 +17,7 @@
             };
 
             var connect = function () {
-                var trackStream = $websocket('ws://' + $window.location.host + '/', 'echo-protocol');
+                trackStream = $websocket('ws://' + $window.location.host + '/', 'echo-protocol');
 
                 trackStream.onOpen(function () {
                     console.log('Websocket opened');
@@ -25,12 +26,15 @@
 
                 trackStream.onMessage(function (message) {
                     var msg = JSON.parse(message.data);
-                    notifyListenersFor(msg.header.type, msg.data);
+                    if(msg.header && msg.header.type && msg.data) {
+                        notifyListenersFor(msg.header.type, msg.data);
+                    }
                 });
 
                 trackStream.onClose(function () {
                     console.log('Websocket closed');
                     notifyListenersFor('ws-disconnected');
+                    trackStream = null;
                     setTimeout(function () {
                         connect();
                     }, 1000);
@@ -57,6 +61,17 @@
                         if (foundList.length === 0) {
                             listenerMap[msgType] = undefined;
                         }
+                    }
+                },
+                
+                send: function(type, data) {
+                    if(trackStream) {
+                        trackStream.send(JSON.stringify({
+                            header: {
+                                type: type 
+                            },
+                            data: data
+                        }));
                     }
                 }
             };

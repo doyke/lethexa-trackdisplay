@@ -1,111 +1,119 @@
-<div>
-  <div class="panel panel-default panel-info"> 
+<div class="panel panel-default panel-info" style="margin: 0;"> 
     <div class="panel-heading">
+        <toggle-btn enabled="panelVisible"></toggle-btn>
+        <span ng-show="!selected">Trackinfo</span>
         &nbsp;<img src="/flags/blank.png" class="{{getFlagClass(selected.country)}}" alt="{{selected.country}}" />
         &nbsp; {{selected.name}} 
         &nbsp; {{selected.trackId}}
     </div>
-    <div class="panel-body" style="padding: 0px;">
+    <div ng-show="panelVisible" ng-init="panelVisible = true;" class="panel-body" style="padding: 0px;">
 
-      <div class="panel panel-default" style="margin: 0px;">
-	<div class="panel-heading">Dynamic data</div>
-	<div class="panel-body" style="padding: 0px;">
-	  <table class="table table-striped table-bordered" style="padding: 0px; margin: 0px;">
-	    <tr ng-show='selected !== undefined'>
-	      <td style="width: 150px;">TrackId:</td>
-              <td>{{selected.trackId}}&nbsp;<a href="#" ng-click="filterByMMSI()"><i class="fa fa-filter" aria-hidden="true"></a></i></td>
-	    </tr>
-	    <tr ng-show='selected.firstctc !== undefined'>
-	      <td>First contact:</td>
-	      <td>{{cvtTime(selected.firstctc)}}</td>
-	    </tr>
-	    <tr ng-show='selected.lastctc !== undefined'>
-	      <td>Last contact:</td>
-	      <td>{{cvtTime(selected.lastctc)}}</td>
-	    </tr>
-	    <tr ng-show='selected.lat !== undefined && selected.lon !== undefined'>
-                <td>Position:&nbsp;&nbsp;<a href="#" ng-click="recenter()"><i class="fa fa-crosshairs" style="font-size: 24px;vertical-align: middle;"></i></a></td>
-	      <td>{{cvtPosition(selected.lat, selected.lon)}}</td>
-	    </tr>
-	    <tr ng-show='selected.heading !== undefined'>
-	      <td>Heading:</td>
-	      <td>{{cvtDirection(selected.heading)}}</td>
-	    </tr>
-	    <tr ng-show='selected.course !== undefined'>
-	      <td>Course:</td>
-	      <td>{{cvtDirection(selected.course)}}</td>
-	    </tr>
-	    <tr ng-show='selected.rot !== undefined'>
-	      <td>Rate of turn:</td>
-	      <td>{{cvtRoteOfTurn(selected.rot)}}</td>
-	    </tr>
-	    <tr ng-show='selected.speed !== undefined'>
-	      <td>Speed:</td>
-	      <td>{{cvtSpeed(selected.speed)}}</td>
-	    </tr>
-      <tr ng-show='selected.utcTime !== undefined'>
-        <td>UTC Time:</td>
-        <td>{{selected.utcTime}}</td>
-      </tr>
-    </table>
-	</div>
-      </div>
+        <div class="panel panel-default" style="margin: 0px;">
+            <div class="panel-heading">
+                <toggle-btn enabled="panel1Visible"></toggle-btn>
+                Dynamic data
+            </div>
+            <div ng-show="panel1Visible" ng-init="panel1Visible = true;" class="panel-body" style="padding: 0px;">
+                <table class="table table-striped table-bordered" style="padding: 0px; margin: 0px;">
+                    <tr ng-show='selected !== undefined'>
+                        <td style="width: 150px;">TrackId:</td>
+                        <td>{{selected.trackId}}&nbsp;<a href="#" ng-click="filterByMMSI()"><i class="fa fa-filter" aria-hidden="true"></a></i></td>
+                    </tr>
+                    <tr ng-show='selected.firstctc !== undefined'>
+                        <td>First contact:</td>
+                        <td>{{cvtTime(selected.firstctc)}}</td>
+                    </tr>
+                    <tr ng-show='selected.lastctc !== undefined'>
+                        <td>Last contact:</td>
+                        <td>{{cvtTime(selected.lastctc)}}</td>
+                    </tr>
+                    <tr ng-show='selected.lat !== undefined && selected.lon !== undefined'>
+                        <td>Position:&nbsp;&nbsp;<a href="#" ng-click="recenter()"><i class="fa fa-crosshairs" style="font-size: 24px;vertical-align: middle;"></i></a></td>
+                        <td>{{cvtPosition(selected.lat, selected.lon)}}</td>
+                    </tr>
+                    <tr ng-show='selected.heading !== undefined'>
+                        <td>Heading:</td>
+                        <td>{{cvtDirection(selected.heading)}}</td>
+                    </tr>
+                    <tr ng-show='selected.course !== undefined'>
+                        <td>Course:</td>
+                        <td>{{cvtDirection(selected.course)}}</td>
+                    </tr>
+                    <tr ng-show='selected.rot !== undefined'>
+                        <td>Rate of turn:</td>
+                        <td>{{cvtRoteOfTurn(selected.rot)}}</td>
+                    </tr>
+                    <tr ng-show='selected.speed !== undefined'>
+                        <td>Speed:</td>
+                        <td>{{cvtSpeed(selected.speed)}}</td>
+                    </tr>
+                    <tr ng-show='selected.utcTime !== undefined'>
+                        <td>UTC Time:</td>
+                        <td>{{selected.utcTime}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
 
-      <div class="panel panel-default" style="margin: 0px;">
-	<div class="panel-heading">Voyage data</div>
-	<div class="panel-body" style="padding: 0px;">
-	  <table class="table table-striped table-bordered" style="padding: 0px; margin: 0px;">
-	    <tr ng-show='selected.dest !== undefined'>
-	      <td style="width: 150px;">Destination:</td>
-	      <td>{{selected.dest}}</td>
-	    </tr>
-	    <tr ng-show='selected.cargo !== undefined'>
-	      <td>Cargo:</td>
-	      <td>{{selected.cargoname}}</td>
-	    </tr>
-	    <tr ng-show='selected.draught !== undefined'>
-	      <td>Draught:</td>
-	      <td>{{cvtLength(selected.draught)}}</td>
-	    </tr>
-	  </table>
-	</div>
-      </div>
+        <div class="panel panel-default" style="margin: 0px;">
+            <div class="panel-heading">
+                <toggle-btn enabled="panel2Visible"></toggle-btn>
+                Voyage data
+            </div>
+            <div ng-show="panel2Visible" ng-init="panel2Visible = false;" class="panel-body" style="padding: 0px;">
+                <table class="table table-striped table-bordered" style="padding: 0px; margin: 0px;">
+                    <tr ng-show='selected.dest !== undefined'>
+                        <td style="width: 150px;">Destination:</td>
+                        <td>{{selected.dest}}</td>
+                    </tr>
+                    <tr ng-show='selected.cargo !== undefined'>
+                        <td>Cargo:</td>
+                        <td>{{selected.cargoname}}</td>
+                    </tr>
+                    <tr ng-show='selected.draught !== undefined'>
+                        <td>Draught:</td>
+                        <td>{{cvtLength(selected.draught)}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
 
-      <div class="panel panel-default" style="margin: 0px;">
-	<div class="panel-heading">Static data</div>
-	<div class="panel-body" style="padding: 0px;">
-	  <table class="table table-striped table-bordered" style="padding: 0px; margin: 0px;">
-	    <tr ng-show='selected.name !== undefined'>
-	      <td style="width: 150px;">Name:</td>
-	      <td>{{selected.name}}</td>
-	    </tr>
-	    <tr ng-show='selected.callsign !== undefined'>
-	      <td>Callsign:</td>
-	      <td>{{selected.callsign}}</td>
-	    </tr>
-	    <tr ng-show='selected.imo !== undefined'>
-	      <td>IMO:</td>
-	      <td>{{selected.imo}}</td>
-	    </tr>
-	    <tr ng-show='cvtDimensions(selected.objlength, selected.objbeam) !== undefined'>
-	      <td>Length x Beam:</td>
-	      <td>{{cvtDimensions(selected.objlength, selected.objbeam)}}</td>
-	    </tr>
-	    <tr ng-show='selected.type !== undefined'>
-	      <td>Type:</td>
-	      <td>{{cvtType(selected.type)}}</td>
-	    </tr>
-	    <tr ng-show='selected.navdev !== undefined'>
-	      <td>Nav.-device:</td>
-	      <td>{{selected.navdev}}</td>
-	    </tr>
-	  </table>
-	</div>
-      </div>
-      <div ng-show="selected.trackId !== undefined" class="well well-sm">
-        <a target="_blank" href="http://www.marinetraffic.com/en/ais/details/ships/mmsi:{{selected.trackId}}">MarineTraffic.com</a>
-      </div>
-
-      </div>
-   </div>
+        <div class="panel panel-default" style="margin: 0px;">
+            <div class="panel-heading">
+                <toggle-btn enabled="panel3Visible"></toggle-btn>
+                Static data
+            </div>
+            <div ng-show="panel3Visible" ng-init="panel3Visible = false;" class="panel-body" style="padding: 0px;">
+                <table class="table table-striped table-bordered" style="padding: 0px; margin: 0px;">
+                    <tr ng-show='selected.name !== undefined'>
+                        <td style="width: 150px;">Name:</td>
+                        <td>{{selected.name}}</td>
+                    </tr>
+                    <tr ng-show='selected.callsign !== undefined'>
+                        <td>Callsign:</td>
+                        <td>{{selected.callsign}}</td>
+                    </tr>
+                    <tr ng-show='selected.imo !== undefined'>
+                        <td>IMO:</td>
+                        <td>{{selected.imo}}</td>
+                    </tr>
+                    <tr ng-show='cvtDimensions(selected.objlength, selected.objbeam) !== undefined'>
+                        <td>Length x Beam:</td>
+                        <td>{{cvtDimensions(selected.objlength, selected.objbeam)}}</td>
+                    </tr>
+                    <tr ng-show='selected.type !== undefined'>
+                        <td>Type:</td>
+                        <td>{{cvtType(selected.type)}}</td>
+                    </tr>
+                    <tr ng-show='selected.navdev !== undefined'>
+                        <td>Nav.-device:</td>
+                        <td>{{selected.navdev}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div ng-show="selected.trackId !== undefined" class="well well-sm">
+            <a target="_blank" href="http://www.marinetraffic.com/en/ais/details/ships/mmsi:{{selected.trackId}}">MarineTraffic.com</a>
+        </div>
+    </div>
 </div>

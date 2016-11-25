@@ -1,0 +1,44 @@
+<div class="panel panel-default panel-info" style="margin: 0;"> 
+    <div class="panel-heading">
+        <toggle-btn enabled="panelVisible"></toggle-btn>
+        Replay
+    </div>
+    <div ng-show="panelVisible" class="panel-body" style="padding: 0px;">
+
+        <div class="container-fluid" style="width: 100%; height: 100%; margin: 0px; padding: 0px;">
+            <div class="row" style="margin: 0px;">
+                <div class="col-md-2" style="padding: 0px;">
+                    From
+                </div>
+                <div class="col-md-10" style="padding: 0px;">
+                    <input-datetime ng-model="startTime" placeholder-date="Start date" placeholder-time="Start time"></input-datetime>
+                </div>
+            </div>
+            <div class="row" style="margin: 0px;">
+                <div class="col-md-2" style="padding: 0px;">
+                    To
+                </div>
+                <div class="col-md-5" style="padding: 0px;">
+                    <input-date ng-model="endDate" placeholder="End date"></input-date>
+                </div>
+                <div class="col-md-5" style="padding: 0px;">
+                    <input-time ng-model="endTime" placeholder="End time"></input-time>
+                </div>
+            </div>
+            <div class="row" style="margin: 0px;">
+                <div class="col-md-2" style="padding: 0px;">
+                </div>
+                <div class="col-md-10" style="padding: 0px;">
+                    <player-ctrl 
+                        show-play=true 
+                        show-pause=true
+                        show-stop=true
+                        ng-play="startReplay()" 
+                        ng-pause="pauseReplay()" 
+                        ng-stop="stopReplay()">
+                    </player-ctrl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

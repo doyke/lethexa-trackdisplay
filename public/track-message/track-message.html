@@ -1,12 +1,19 @@
-<div>
-  <table class="table table-striped table-bordered" style="padding: 0px; margin: 0px;">
-    <tr>
-      <th style="width: 100px;">From</th>
-      <th>Text</th>
-    </tr>
-    <tr>
-      <td>123456789</td>
-      <td>Testmessage</td>
-    </tr>
-  </table>
+<div class="panel panel-default panel-info" style="margin: 0;"> 
+    <div class="panel-heading">
+        <toggle-btn enabled="panelVisible"></toggle-btn>
+        Messages
+    </div>
+    <div ng-show="panelVisible" class="panel-body" style="padding: 0px;">
+
+        <table class="table table-striped table-bordered" style="padding: 0px; margin: 0px;">
+            <tr>
+                <th style="width: 100px;">From</th>
+                <th>Text</th>
+            </tr>
+            <tr>
+                <td>123456789</td>
+                <td>Testmessage</td>
+            </tr>
+        </table>
+    </div>
 </div>

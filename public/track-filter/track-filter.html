@@ -1,59 +1,57 @@
-<div>
-    <div class="panel panel-default panel-info"> 
-        <div class="panel-heading">
-            Track filter&nbsp;<a href="#" ng-click="clearAllFilter()"><i class="fa fa-remove" aria-hidden="true"></i></a>
-        </div>
-        <div class="panel-body" style="padding: 0px;">
+<div class="panel panel-default panel-info" style="margin: 0;"> 
+    <div class="panel-heading">
+        <toggle-btn enabled="panelVisible"></toggle-btn>Track filter&nbsp;<a href="#" ng-click="clearAllFilter()"><i class="fa fa-remove" aria-hidden="true"></i></a>
+    </div>
+    <div ng-show="panelVisible" class="panel-body" style="padding: 0px;">
 
-            <table class="table table-striped table-bordered" style="padding: 0px; margin: 0px;">
-                <tr>
-                    <td style="width: 150px;"><label for="trackIdList">TrackId:</label></td>
-                    <td>
-                        <input id="trackIdList" ng-model="trackFilter.trackIdList" type="text" />
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width: 150px;"><label for="trackName">Name:</label></td>
-                    <td>
-                        <input id="trackName" ng-model="trackFilter.trackName" type="text" />
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width: 150px;"><label for="destination">Destination</label></td>
-                    <td>
-                        <input id="destination" ng-model="trackFilter.destination" type="text" />
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width: 150px;"><label for="trackSpeed">Speed [kt]:</label></td>
-                    <td>
-                        <select ng-options="operator for operator in operators" ng-model="trackFilter.speed.op"></select>
-                        <input id="trackSpeed" ng-model="trackFilter.speed.value" type="number" min="0" max="100" step="1" />
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width: 150px;"><label for="trackDraught">Draught [m]:</label></td>
-                    <td>
-                        <select ng-options="operator for operator in operators" ng-model="trackFilter.draught.op"></select>
-                        <input id="trackDraught" ng-model="trackFilter.draught.value" type="number" min="0" max="50" step="1" />
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width: 150px;"><label for="trackLength">Length [m]:</label></td>
-                    <td>
-                        <select ng-options="operator for operator in operators" ng-model="trackFilter.length.op"></select>
-                        <input id="trackLength" ng-model="trackFilter.length.value" type="number" min="0" max="500" step="1" />
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width: 150px;"><label for="trackBeam">Beam [m]:</label></td>
-                    <td>
-                        <select ng-options="operator for operator in operators" ng-model="trackFilter.beam.op"></select>
-                        <input id="trackBeam" ng-model="trackFilter.beam.value" type="number" min="0" max="500" step="1" />
-                    </td>
-                </tr>
-            </table>
+        <table class="table table-striped table-bordered" style="padding: 0px; margin: 0px;">
+            <tr>
+                <td style="width: 150px;"><label for="trackIdList">TrackId:</label></td>
+                <td>
+                    <input id="trackIdList" ng-model="trackFilter.trackIdList" type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 150px;"><label for="trackName">Name:</label></td>
+                <td>
+                    <input id="trackName" ng-model="trackFilter.trackName" type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 150px;"><label for="destination">Destination</label></td>
+                <td>
+                    <input id="destination" ng-model="trackFilter.destination" type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 150px;"><label for="trackSpeed">Speed [kt]:</label></td>
+                <td>
+                    <select ng-options="operator for operator in operators" ng-model="trackFilter.speed.op"></select>
+                    <input id="trackSpeed" ng-model="trackFilter.speed.value" type="number" min="0" max="100" step="1" />
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 150px;"><label for="trackDraught">Draught [m]:</label></td>
+                <td>
+                    <select ng-options="operator for operator in operators" ng-model="trackFilter.draught.op"></select>
+                    <input id="trackDraught" ng-model="trackFilter.draught.value" type="number" min="0" max="50" step="1" />
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 150px;"><label for="trackLength">Length [m]:</label></td>
+                <td>
+                    <select ng-options="operator for operator in operators" ng-model="trackFilter.length.op"></select>
+                    <input id="trackLength" ng-model="trackFilter.length.value" type="number" min="0" max="500" step="1" />
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 150px;"><label for="trackBeam">Beam [m]:</label></td>
+                <td>
+                    <select ng-options="operator for operator in operators" ng-model="trackFilter.beam.op"></select>
+                    <input id="trackBeam" ng-model="trackFilter.beam.value" type="number" min="0" max="500" step="1" />
+                </td>
+            </tr>
+        </table>
 
-        </div>
     </div>
 </div>
