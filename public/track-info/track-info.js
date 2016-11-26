@@ -3,7 +3,8 @@
 (function() {
 
   var trackInfo = angular.module('trackInfo', [
-      'trackAPI'
+      'trackAPI',
+      'photoAPI'
   ]);
 
   trackInfo.directive('trackInfo', function() {
@@ -20,9 +21,21 @@
     };
   });
 
-  trackInfo.controller('TrackInfoCtrl', ['$scope', '$trackAPI', function($scope, $trackAPI) {
+  trackInfo.controller('TrackInfoCtrl', ['$scope', '$trackAPI', '$photoAPI', function($scope, $trackAPI, $photoAPI) {
     $scope.cvtLatitudeToDegMinSec = geo.cvtLatitudeToDegMinSec;
     $scope.cvtLongitudeToDegMinSec = geo.cvtLongitudeToDegMinSec;
+    $scope.photos = [];
+    $scope.countryName = '';
+
+    $scope.$watch('selected', function(item) {
+        if (item === undefined) {
+            $scope.photos = [];
+        } else {
+            $photoAPI.fetchPhotos($scope.selected.trackId, function (list) {
+                $scope.photos = list;
+            });
+        }
+    });
 
     $scope.$watch('selected', function(selected) {
         if(!selected)

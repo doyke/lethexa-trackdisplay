@@ -2,14 +2,14 @@
     <div class="panel-heading">
         <toggle-btn enabled="panelVisible"></toggle-btn>
         <span ng-show="!selected">Trackinfo</span>
-        
+
         &nbsp;<a href="#" data-toggle="tooltip" title="{{countryName}}"><img src="/flags/blank.png" class="{{getFlagClass(selected.country)}}" alt="{{selected.country}}" /></a>
         &nbsp; {{selected.name}} 
         &nbsp; {{selected.trackId}}
         <script>
-        $(document).ready(function(){
-            $('[data-toggle="tooltip"]').tooltip();
-        });
+            $(document).ready(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+            });
         </script>
     </div>
     <div ng-show="panelVisible && selected" ng-init="panelVisible = true;" class="panel-body" style="padding: 0px;">
@@ -130,6 +130,23 @@
                 </table>
             </div>
         </div>
+
+        <div class="panel panel-default" style="margin: 0px;">
+            <div class="panel-heading" style="padding-top: 0px; padding-bottom: 0px; padding-left: 30px;">
+                <toggle-btn enabled="panel4Visible"></toggle-btn>
+                Images
+            </div>
+            <div ng-show="panel4Visible" ng-init="panel4Visible = false;" class="panel-body" style="padding: 0px;">
+                <div class="row">
+                    <div class="col-xs-6 col-md-3" ng-repeat="photo in photos">
+                        <a target="_blank" href="/photos/{{photo._id}}" class="thumbnail">
+                            <img src="/photos/{{photo._id}}" alt="{{photo.filename}}" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div ng-show="selected.trackId !== undefined" class="well well-sm">
             <a target="_blank" href="http://www.marinetraffic.com/en/ais/details/ships/mmsi:{{selected.trackId}}">MarineTraffic.com</a>
         </div>
