@@ -9,7 +9,7 @@
     'trackMessage',
     'trackSearch',
     'replayer',
-    'photoList',
+    'photoUpload',
     'waitDialog'
   ]);
 
