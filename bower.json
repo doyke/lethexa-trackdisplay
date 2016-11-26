@@ -32,6 +32,7 @@
     "leaflet": "~0.7.5",
     "leaflet-tracksymbol": "^1.0.7",
     "lethexa-units": "^1.0.2",
-    "leaflet-draw": "leaflet.draw#^0.4.0"
+    "leaflet-draw": "leaflet.draw#^0.4.0",
+    "lethexa-geo": "git@cfg.home.web:/~/base/js/lethexa-geo.git#~1.0.0"
   }
 }

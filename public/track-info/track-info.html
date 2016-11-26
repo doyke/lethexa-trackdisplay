@@ -37,6 +37,8 @@
                         <td>Position:&nbsp;&nbsp;<a href="#" ng-click="recenter()"><i class="fa fa-crosshairs" style="font-size: 24px;vertical-align: middle;"></i></a></td>
                         <td>
                             {{cvtPosition(selected.lat, selected.lon)}} 
+                            <br>
+                            {{cvtLatitudeToDegMinSec(selected.lat)}}&nbsp;&nbsp;{{cvtLongitudeToDegMinSec(selected.lon)}}
                         </td>
                     </tr>
                     <tr ng-show='selected.lat !== undefined && selected.lon !== undefined'>

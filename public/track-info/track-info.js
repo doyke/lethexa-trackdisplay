@@ -1,4 +1,4 @@
-/* global units */
+/* global units, geo */
 
 (function() {
 
@@ -21,6 +21,8 @@
   });
 
   trackInfo.controller('TrackInfoCtrl', ['$scope', '$trackAPI', function($scope, $trackAPI) {
+    $scope.cvtLatitudeToDegMinSec = geo.cvtLatitudeToDegMinSec;
+    $scope.cvtLongitudeToDegMinSec = geo.cvtLongitudeToDegMinSec;
 
     $scope.$watch('selected', function(selected) {
         if(!selected)
