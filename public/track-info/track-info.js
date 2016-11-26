@@ -59,7 +59,7 @@
       if(value === undefined)
 	return undefined;
       var date = new Date(value);
-      return date.toString();
+      return date.toISOString();
     };
 
     $scope.cvtPosition = function(lat, lon) {
