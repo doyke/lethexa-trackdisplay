@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-xs-6 col-md-3" ng-repeat="photo in photos">
         <a href="#" class="thumbnail" ng-click="clickImage(photo)" data-toggle="modal" data-target="#pictureModal">
-            <img src="/photos/{{photo._id}}" alt="photo" />
+            <img ng-src="/photos/{{photo._id}}" alt="photo" />
         </a>
     </div>
     <div class="col-xs-6 col-md-3" style="text-align: center;">
@@ -26,7 +26,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12 thumbnail">
-                            <img src="{{photoUrl}}" alt="photo" />
+                            <img ng-src="{{photoUrl}}" alt="photo" />
                         </div>
                     </div>
                 </div>
