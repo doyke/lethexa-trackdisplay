@@ -1,9 +1,9 @@
 (function () {
 
-    var inputDate = angular.module('inputDate', [
+    var inputText = angular.module('inputText', [
     ]);
 
-    inputDate.directive('inputDate', function () {
+    inputText.directive('inputText', function () {
         return {
             restrict: 'E',
             replace: true,
@@ -12,12 +12,12 @@
                 placeholder: '@',
                 editable: '=?'
             },
-            templateUrl: 'input-date/input-date.html',
-            controller: 'InputDateCtrl'
+            templateUrl: 'input-text/input-text.html',
+            controller: 'InputTextCtrl'
         };
     });
 
-    inputDate.controller('InputDateCtrl', ['$scope', function ($scope) {
+    inputText.controller('InputTextCtrl', ['$scope', function ($scope) {
         }]);
 
 }());

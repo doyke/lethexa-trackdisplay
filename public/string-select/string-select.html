@@ -1,0 +1,4 @@
+<span>
+    <span ng-show="!editable">{{_model.name}}</span>
+    <select ng-show="editable" style="width: 200px;" ng-options="option.name for option in optionsList track by option.value" ng-model="_model"></select>
+</span>

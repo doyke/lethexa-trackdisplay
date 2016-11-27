@@ -9,7 +9,8 @@
             replace: true,
             scope: {
                 ngModel: '=?',
-                placeholder: '@'
+                placeholder: '@',
+                editable: '=?'
             },
             templateUrl: 'input-time/input-time.html',
             controller: 'InputTimeCtrl'

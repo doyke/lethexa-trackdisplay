@@ -145,7 +145,12 @@
                     history.forEach(function (state) {
                         linePoints.push(L.latLng(state.lat, state.lon));
                     });
-                    historyPath.setLatLngs(linePoints);
+                    try{
+                        historyPath.setLatLngs(linePoints);
+                    }
+                    catch(err) {
+                        console.log(err, trackId, linePoints);
+                    }
                 });
             };
             

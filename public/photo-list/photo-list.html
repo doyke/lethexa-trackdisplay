@@ -4,7 +4,7 @@
             <img ng-src="/photos/{{photo._id}}" alt="photo" />
         </a>
     </div>
-    <div class="col-xs-6 col-md-3" style="text-align: center;">
+    <div ng-show="editable" class="col-xs-6 col-md-3" style="text-align: center;">
         <div ngf-drop ngf-select ng-model="files" style="background: #F8F8F8;border: 5px dashed #DDD; width: 100%; cursor: pointer;" 
              ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="false"
              accept="image/*" 
@@ -26,12 +26,12 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12 thumbnail">
-                            <img ng-src="{{photoUrl}}" alt="photo" />
+                            <a target="_blank" ng-href="{{photoUrl}}"><img ng-src="{{photoUrl}}" alt="photo" /></a>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="#" ng-click="deleteSelectedPhoto();" data-dismiss="modal"><i class="fa fa-trash"></i></a>
+                    <a ng-show="editable" href="#" ng-click="deleteSelectedPhoto();" data-dismiss="modal"><i class="fa fa-trash"></i></a>
                 </div>
             </div>
 

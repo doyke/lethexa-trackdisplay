@@ -12,7 +12,8 @@
             scope: {
                 ngModel: '=?',
                 placeholderDate: '@',
-                placeholderTime: '@'
+                placeholderTime: '@',
+                editable: '=?'
             },
             templateUrl: 'input-datetime/input-datetime.html',
             controller: 'InputDatetimeCtrl'
@@ -20,8 +21,14 @@
     });
 
     inputDatetime.controller('InputDatetimeCtrl', ['$scope', function ($scope) {
+            
+            $scope.$watch('ngModel', function(newDate) {
+                //$scope.dateModel = newDate;
+                //$scope.timeModel = newDate;
+            });
+            
             $scope.$watch('dateModel', function(newDate) {
-                //console.log(newDate);
+                
             });
 
             $scope.$watch('timeModel', function(newTime) {

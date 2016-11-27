@@ -5,6 +5,9 @@
     var trackInfo = angular.module('trackInfo', [
         'trackAPI',
         'photoList',
+        'inputText',
+        'inputNumber',
+        'inputUnit',
         'ngFileUpload'
     ]);
 
@@ -15,7 +18,8 @@
             scope: {
                 selected: '=?',
                 mapcenter: '=?',
-                trackFilter: '=?'
+                trackFilter: '=?',
+                editable: '=?'
             },
             templateUrl: 'track-info/track-info.html',
             controller: 'TrackInfoCtrl'

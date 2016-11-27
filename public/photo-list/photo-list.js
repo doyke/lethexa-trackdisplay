@@ -12,7 +12,8 @@
             restrict: 'E',
             replace: true,
             scope: {
-                selected: '=?'
+                selected: '=?',
+                editable: '=?'
             },
             templateUrl: 'photo-list/photo-list.html',
             controller: 'PhotoListCtrl'
