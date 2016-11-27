@@ -19,6 +19,7 @@
                 selected: '=?',
                 mapcenter: '=?',
                 trackFilter: '=?',
+                units: '=?',
                 editable: '=?'
             },
             templateUrl: 'track-info/track-info.html',
@@ -31,7 +32,7 @@
             $scope.cvtLongitudeToDegMinSec = geo.cvtLongitudeToDegMinSec;
             $scope.countryName = '';
 
-            $scope.units = {
+            $scope.units = $scope.units || {
                 length: {
                     unitFactor: 1.0,
                     unit: 'm',

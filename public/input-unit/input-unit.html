@@ -1,5 +1,5 @@
 <span class="input-group input-group-sm">
     <span ng-show="!editable">{{_internalModelValue}}{{unit}}</span>
-    <input ng-show="editable" type="number" ng-model="_internalModelValue" min="{{min}}" max="{{max}}" step="{{step}}" style="width: 100%;" placeholder="{{placeholder}}">
-    <span ng-show="editable && unit" class="input-group-addon" id="sizing-addon3">{{unit}}</span>
+    <input ng-show="editable" class="form-control" type="number" ng-model="_internalModelValue" min="{{min}}" max="{{max}}" step="{{step}}" style="width: 100%;" placeholder="{{placeholder}}">
+    <span ng-show="editable && unit" class="input-group-addon">{{unit}}</span>
 </span>

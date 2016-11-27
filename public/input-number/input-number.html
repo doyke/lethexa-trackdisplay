@@ -1,5 +1,4 @@
 <span class="input-group input-group-sm">
     <span ng-show="!editable">{{ngModel}}</span>
-    <input ng-show="editable" type="number" ng-model="ngModel" min="{{min}}" max="{{max}}" step="{{step}}" style="width: 100%;" placeholder="{{placeholder}}">
-    <span ng-show="editable" class="input-group-addon" id="sizing-addon3"></span>
+    <input ng-show="editable" class="form-control" type="number" ng-model="ngModel" min="{{min}}" max="{{max}}" step="{{step}}" style="width: 100%;" placeholder="{{placeholder}}">
 </span>

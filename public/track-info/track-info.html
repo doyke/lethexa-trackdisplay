@@ -3,7 +3,7 @@
         <toggle-btn enabled="panelVisible"></toggle-btn>
         <span ng-show="!selected">Trackinfo</span>
 
-        &nbsp;<a href="#" data-toggle="tooltip" title="{{countryName}}"><img src="/flags/blank.png" class="{{getFlagClass(selected.country)}}" alt="{{selected.country}}" /></a>
+        &nbsp;<img src="/flags/blank.png" data-toggle="tooltip" title="{{countryName}}" class="{{getFlagClass(selected.country)}}" alt="{{selected.country}}" />
         &nbsp; {{selected.name}} 
         &nbsp; {{selected.trackId}}
         &nbsp; 
@@ -120,9 +120,17 @@
                         <td>IMO:</td>
                         <td><input-number editable="editable" ng-model="selected.imo"></input-number></td>
                     </tr>
-                    <tr ng-show='cvtDimensions(selected.objlength, selected.objbeam) !== undefined'>
-                        <td>Length x Beam:</td>
-                        <td>{{cvtDimensions(selected.objlength, selected.objbeam)}}</td>
+                    <tr ng-show='selected.objlength !== undefined'>
+                        <td>Length:</td>
+                        <td>
+                            <input-unit editable="editable" ng-model="selected.objlength" unit="{{units.length.unit}}" unit-factor="units.length.unitFactor" min="0" step="0.1"></input-unit>
+                        </td>
+                    </tr>
+                    <tr ng-show='selected.objbeam !== undefined'>
+                        <td>Beam:</td>
+                        <td>
+                            <input-unit editable="editable" ng-model="selected.objbeam" unit="{{units.length.unit}}" unit-factor="units.length.unitFactor" min="0" step="0.1"></input-unit>
+                        </td>
                     </tr>
                     <tr ng-show='selected.type !== undefined'>
                         <td>Type:</td>
