@@ -130,8 +130,16 @@
                 </table>
             </div>
         </div>
-        
-        <photo-list selected="selected"></photo-list>
+
+        <div class="panel panel-default" style="margin: 0px;">
+            <div class="panel-heading" style="padding-top: 0px; padding-bottom: 0px; padding-left: 30px;">
+                <toggle-btn enabled="panel4Visible"></toggle-btn>
+                Photos
+            </div>
+            <div ng-show="panel4Visible" ng-init="panel4Visible = false;" class="panel-body" style="padding: 0px;">
+                <photo-list selected="selected"></photo-list>
+            </div>
+        </div>
 
         <div ng-show="selected.trackId !== undefined" class="well well-sm">
             <a target="_blank" href="http://www.marinetraffic.com/en/ais/details/ships/mmsi:{{selected.trackId}}">MarineTraffic.com</a>

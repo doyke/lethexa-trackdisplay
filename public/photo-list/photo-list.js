@@ -50,7 +50,6 @@
                     $scope.files = [$scope.file];
                 }
             });
-            $scope.log = '';
 
             $scope.deleteSelectedPhoto = function() {
                 if($scope.selectedPhoto === undefined)
@@ -62,6 +61,7 @@
                 });
             };
 
+            $scope.log = '';
             $scope.upload = function (files) {
                 if (files && files.length) {
                     for (var i = 0; i < files.length; i++) {
@@ -72,7 +72,7 @@
                             $scope.uploading = true;
                             $scope.percentComplete = 0;
                             Upload.upload({
-                                url: '/photos/' + $scope.selected.trackId,
+                                url: '/photos/track/' + $scope.selected.trackId,
                                 data: {
                                     recfile: file
                                 }

@@ -4,7 +4,6 @@
 
     var trackInfo = angular.module('trackInfo', [
         'trackAPI',
-        'photoAPI',
         'photoList',
         'ngFileUpload'
     ]);
@@ -23,7 +22,7 @@
         };
     });
 
-    trackInfo.controller('TrackInfoCtrl', ['$scope', '$trackAPI', '$photoAPI', '$timeout', 'Upload', function ($scope, $trackAPI, $photoAPI, $timeout, Upload) {
+    trackInfo.controller('TrackInfoCtrl', ['$scope', '$trackAPI', function ($scope, $trackAPI) {
             $scope.cvtLatitudeToDegMinSec = geo.cvtLatitudeToDegMinSec;
             $scope.cvtLongitudeToDegMinSec = geo.cvtLongitudeToDegMinSec;
             $scope.countryName = '';
