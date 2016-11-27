@@ -5,6 +5,7 @@
     var trackInfo = angular.module('trackInfo', [
         'trackAPI',
         'photoAPI',
+        'photoList',
         'ngFileUpload'
     ]);
 
