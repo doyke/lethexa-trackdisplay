@@ -31,6 +31,34 @@
             $scope.cvtLongitudeToDegMinSec = geo.cvtLongitudeToDegMinSec;
             $scope.countryName = '';
 
+            $scope.units = {
+                length: {
+                    unitFactor: 1.0,
+                    unit: 'm',
+                    unitName: 'meters'
+                },
+                depth: {
+                    unitFactor: 1.0,
+                    unit: 'm',
+                    unitName: 'meters'
+                },
+                speed: {
+                    unitFactor: (1852 / 3600),
+                    unit: 'm/s',
+                    unitName: 'meters per second'
+                },
+                direction: {
+                    unitFactor: (180.0 / Math.PI),
+                    unit: '°',
+                    unitName: 'Degree'
+                },
+                turnrate: {
+                    unitFactor: 1.0,
+                    unit: '°/s',
+                    unitName: 'Degree per second'
+                }
+            };
+
             $scope.$watch('selected', function (selected) {
                 if (!selected)
                     $scope.countryName = '';

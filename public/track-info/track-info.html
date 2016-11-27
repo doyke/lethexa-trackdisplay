@@ -56,19 +56,19 @@
                     </tr>
                     <tr ng-show='selected.heading !== undefined'>
                         <td>Heading:</td>
-                        <td><input-unit editable="editable" ng-model="selected.heading" unit="°" unit-factor="57.2957795131" min="0" step="0.01"></input-unit></td>
+                        <td><input-unit editable="editable" ng-model="selected.heading" unit="{{units.direction.unit}}" unit-factor="units.direction.unitFactor" min="0" step="0.01"></input-unit></td>
                     </tr>
                     <tr ng-show='selected.course !== undefined'>
                         <td>Course:</td>
-                        <td><input-unit editable="editable" ng-model="selected.course" unit="°" unit-factor="57.2957795131" min="0" step="0.01"></input-unit></td>
+                        <td><input-unit editable="editable" ng-model="selected.course" unit="{{units.direction.unit}}" unit-factor="units.direction.unitFactor" min="0" step="0.01"></input-unit></td>
                     </tr>
                     <tr ng-show='selected.rot !== undefined'>
                         <td>Rate of turn:</td>
-                        <td>{{cvtRoteOfTurn(selected.rot)}}</td>
+                        <td><input-unit editable="editable" ng-model="selected.rot" unit="{{units.turnrate.unit}}" unit-factor="units.turnrate.unitFactor" min="0" step="0.01"></input-unit></td>
                     </tr>
                     <tr ng-show='selected.speed !== undefined'>
                         <td>Speed:</td>
-                        <td><input-unit editable="editable" ng-model="selected.speed" unit="kts" unit-factor="1" min="0" step="0.1"></input-unit></td>
+                        <td><input-unit editable="editable" ng-model="selected.speed" unit="{{units.speed.unit}}" unit-factor="units.speed.unitFactor" min="0" step="0.1"></input-unit></td>
                     </tr>
                     <tr ng-show='selected.utcTime !== undefined'>
                         <td>UTC Time:</td>
@@ -95,7 +95,7 @@
                     </tr>
                     <tr ng-show='selected.draught !== undefined'>
                         <td>Draught:</td>
-                        <td><input-number editable="editable" ng-model="selected.draught" unit="m" min="0" step="0.1"></input-number></td>
+                        <td><input-unit editable="editable" ng-model="selected.draught" unit="{{units.depth.unit}}" unit-factor="units.depth.unitFactor" min="0" step="0.1"></input-unit></td>
                     </tr>
                 </table>
             </div>
