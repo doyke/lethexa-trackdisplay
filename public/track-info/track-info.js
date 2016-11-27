@@ -26,18 +26,7 @@
     trackInfo.controller('TrackInfoCtrl', ['$scope', '$trackAPI', '$photoAPI', '$timeout', 'Upload', function ($scope, $trackAPI, $photoAPI, $timeout, Upload) {
             $scope.cvtLatitudeToDegMinSec = geo.cvtLatitudeToDegMinSec;
             $scope.cvtLongitudeToDegMinSec = geo.cvtLongitudeToDegMinSec;
-            $scope.photos = [];
             $scope.countryName = '';
-
-            $scope.$watch('selected', function (item) {
-                if (item === undefined) {
-                    $scope.photos = [];
-                } else {
-                    $photoAPI.fetchPhotos($scope.selected.trackId, function (list) {
-                        $scope.photos = list;
-                    });
-                }
-            });
 
             $scope.$watch('selected', function (selected) {
                 if (!selected)
@@ -141,64 +130,6 @@
                 var specificString = type.specific !== undefined ? type.specific : 'Unknown';
                 return generalString.toUpperCase() + ', ' + categoryString.toUpperCase() + ', ' + specificString.toUpperCase();
             };
-
-
-            $scope.photoUrl = '';
-            $scope.photoFilename = '';
-            $scope.uploading = false;
-
-            $scope.clickImage = function(photo) {
-                $scope.photoUrl = '/photos/' + photo._id;
-                $scope.photoFilename = photo.filename;
-            };
-
-            $scope.$watch('files', function () {
-                $scope.upload($scope.files);
-            });
-            $scope.$watch('file', function () {
-                if ($scope.file !== null) {
-                    $scope.files = [$scope.file];
-                }
-            });
-            $scope.log = '';
-
-            $scope.upload = function (files) {
-                if (files && files.length) {
-                    for (var i = 0; i < files.length; i++) {
-                        var file = files[i];
-                        if(!file)
-                            continue;
-                        if (!file.$error) {
-                            $scope.uploading = true;
-                            $scope.percentComplete = 0;
-                            Upload.upload({
-                                url: '/photos/' + $scope.selected.trackId,
-                                data: {
-                                    recfile: file
-                                }
-                            }).then(function (resp) {
-                                $timeout(function () {
-                                    $scope.percentComplete = 100;
-                                    $scope.uploading = false;
-                                    
-                                    $scope.log = 'file: ' +
-                                            resp.config.data.recfile.name +
-                                            ', Response: ' + JSON.stringify(resp.data) +
-                                            '\n' + $scope.log;
-                                });
-                            }, null, function (evt) {
-                                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                                $scope.percentComplete = progressPercentage;
-                                
-                                $scope.log = 'progress: ' + progressPercentage +
-                                        '% ' + evt.config.data.recfile.name + '\n' +
-                                        $scope.log;
-                            });
-                        }
-                    }
-                }
-            };
-
 
         }]);
 
