@@ -4,11 +4,10 @@
         Upload photos
     </div>
     <div ng-show="panelVisible && selected" ng-init="panelVisible = false;" class="panel-body" style="padding: 0px;">
-        <form action="/photos" method="post" enctype="multipart/form-data"> 
-            <p> Please choose a photo:<br> 
-                <input name="trackId" type="hidden" value="{{selected.trackId}}" />
-                <input name="recfile" type="file" accept="image/*" /> </p> 
-            <button>Upload</button>
-        </form>
+        <div ngf-drop ngf-select ng-model="files" style="background: #F8F8F8;border: 5px dashed #DDD;" 
+                ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="false"
+                accept="image/*" 
+                ngf-pattern="'image/*'">Drop images here or click to upload</div>
+        {{log}}
     </div>
 </div>
