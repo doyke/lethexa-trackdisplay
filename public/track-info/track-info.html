@@ -139,13 +139,50 @@
             <div ng-show="panel4Visible" ng-init="panel4Visible = false;" class="panel-body" style="padding: 0px;">
                 <div class="row">
                     <div class="col-xs-6 col-md-3" ng-repeat="photo in photos">
-                        <a target="_blank" href="/photos/{{photo._id}}" class="thumbnail">
+                        <a href="#" class="thumbnail" ng-click="clickImage(photo)" data-toggle="modal" data-target="#pictureModal">
                             <img src="/photos/{{photo._id}}" alt="{{photo.filename}}" />
                         </a>
                     </div>
+                    <div class="col-xs-6 col-md-3" style="text-align: center;">
+                        <div ngf-drop ngf-select ng-model="files" style="background: #F8F8F8;border: 5px dashed #DDD; width: 100%;" 
+                             ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="false"
+                             accept="image/*" 
+                             ngf-pattern="'image/*'">
+
+                            <i ng-show="!uploading" style="width: 100%;" class="fa fa-3x fa-upload"></i>
+                            <i ng-show="uploading" style="width: 100%;" class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+                        </div>
+                    </div>
+
+                    <!-- Modal -->
+                    <div id="pictureModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">{{selected.name}} &nbsp; {{selected.trackId}}</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-12 thumbnail">
+                                            <img src="{{photoUrl}}" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>        
+
+
                 </div>
             </div>
         </div>
+
 
         <div ng-show="selected.trackId !== undefined" class="well well-sm">
             <a target="_blank" href="http://www.marinetraffic.com/en/ais/details/ships/mmsi:{{selected.trackId}}">MarineTraffic.com</a>
