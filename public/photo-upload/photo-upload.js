@@ -21,6 +21,7 @@
     });
 
     photoUpload.controller('PhotoUploadCtrl', ['$scope', 'Upload', '$timeout', '$photoAPI', function ($scope, Upload, $timeout) {
+            $scope.uploading = false;
 
             $scope.$watch('files', function () {
                 $scope.upload($scope.files);
@@ -39,6 +40,8 @@
                         if(!file)
                             continue;
                         if (!file.$error) {
+                            $scope.uploading = true;
+                            $scope.percentComplete = 0;
                             Upload.upload({
                                 url: '/photos/' + $scope.selected.trackId,
                                 data: {
@@ -46,7 +49,8 @@
                                 }
                             }).then(function (resp) {
                                 $timeout(function () {
-                                    
+                                    $scope.percentComplete = 100;
+                                    $scope.uploading = false;
                                     
                                     $scope.log = 'file: ' +
                                             resp.config.data.recfile.name +
@@ -54,8 +58,9 @@
                                             '\n' + $scope.log;
                                 });
                             }, null, function (evt) {
-                                var progressPercentage = parseInt(100.0 *
-                                        evt.loaded / evt.total);
+                                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                                $scope.percentComplete = progressPercentage;
+                                
                                 $scope.log = 'progress: ' + progressPercentage +
                                         '% ' + evt.config.data.recfile.name + '\n' +
                                         $scope.log;

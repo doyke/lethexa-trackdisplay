@@ -4,10 +4,10 @@
         Upload photos
     </div>
     <div ng-show="panelVisible && selected" ng-init="panelVisible = false;" class="panel-body" style="padding: 0px;">
-        <div ngf-drop ngf-select ng-model="files" style="background: #F8F8F8;border: 5px dashed #DDD;" 
-                ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="false"
-                accept="image/*" 
-                ngf-pattern="'image/*'">Drop images here or click to upload</div>
-        {{log}}
+        <span ngf-drop ngf-select ng-model="files" style="background: #F8F8F8;border: 5px dashed #DDD;" 
+             ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="false"
+             accept="image/*" 
+             ngf-pattern="'image/*'">Drop images here or click to upload</span>
+        <i ng-show="uploading" class="fa fa-spinner fa-spin fa-fw"></i>
     </div>
 </div>
