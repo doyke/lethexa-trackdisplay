@@ -5,6 +5,7 @@
 /build/
 /target/
 /coverage/
+/uploads/
 results.txt
 npm-debug.log
 *.swp

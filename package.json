@@ -13,6 +13,7 @@
   },
   "keywords": [
     "AMQP",
+    "MongoDB",
     "Websocket",
     "Track",
     "Leaflet"

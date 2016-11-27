@@ -15,6 +15,7 @@
     "**/.*",
     "node_modules",
     "bower_components",
+    "uploads",
     "Gruntfile.js",
     "jenkins-grunt.sh",
     "publishTag.sh",
