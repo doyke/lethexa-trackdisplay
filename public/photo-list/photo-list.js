@@ -21,6 +21,7 @@
 
     photoList.controller('PhotoListCtrl', ['$scope', '$photoAPI', '$timeout', 'Upload', function ($scope, $photoAPI, $timeout, Upload) {
             $scope.photos = [];
+            $scope.selectedPhoto = undefined;
             $scope.photoUrl = '';
             $scope.photoFilename = '';
             $scope.uploading = false;
@@ -36,6 +37,7 @@
             });
 
             $scope.clickImage = function(photo) {
+                $scope.selectedPhoto = photo;
                 $scope.photoUrl = '/photos/' + photo._id;
                 $scope.photoFilename = photo.filename;
             };
@@ -49,6 +51,16 @@
                 }
             });
             $scope.log = '';
+
+            $scope.deleteSelectedPhoto = function() {
+                if($scope.selectedPhoto === undefined)
+                    return;
+                $photoAPI.deletePhoto( $scope.selectedPhoto._id, function() {
+                    $photoAPI.fetchPhotos($scope.selected.trackId, function (list) {
+                        $scope.photos = list;
+                    });
+                });
+            };
 
             $scope.upload = function (files) {
                 if (files && files.length) {

@@ -12,6 +12,16 @@
                             function errorCallback(response) {
                             }
                     );
+                },
+                
+                deletePhoto: function (photoId, callback) {
+                    $http.delete('/photos/' + photoId).then(
+                            function successCallback(response) {
+                                callback(response.data);
+                            },
+                            function errorCallback(response) {
+                            }
+                    );
                 }
             };
         }]);
