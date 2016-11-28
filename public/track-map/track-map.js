@@ -60,9 +60,12 @@
             });
 
             $scope.$watch('selected', function (track) {
-                if (track === undefined)
-                    return;
-                updateHistoryPath(track.trackId);
+                if (track === undefined) {
+                    historyPath.setLatLngs([]);
+                }
+                else {
+                    updateHistoryPath(track.trackId);
+                }
             });
             
             $scope.$watch('trackFilter', function (trackFilter) {

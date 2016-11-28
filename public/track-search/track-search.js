@@ -33,6 +33,9 @@
       $trackAPI.fetchTrackFor(idToSearch, function(track) {
         $scope.mapcenter = track;
         $scope.selected = track;
+      }, function() {
+          console.log($scope.selected);
+        $scope.selected = undefined;  
       });
     };
 

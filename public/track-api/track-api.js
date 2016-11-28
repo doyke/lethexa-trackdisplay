@@ -81,21 +81,23 @@
                     return result;
                 },
 
-                fetchTrackFor: function (trackId, callback) {
+                fetchTrackFor: function (trackId, callback, errorCallback) {
                     if (isNaN(trackId)) {
                         $http.get('/track/name/' + trackId).then(
-                                function successCallback(response) {
+                                function(response) {
                                     callback(response.data);
                                 },
-                                function errorCallback(response) {
+                                function(response) {
+                                    errorCallback(response);
                                 }
                         );
                     } else {
                         $http.get('/track/id/' + trackId).then(
-                                function successCallback(response) {
+                                function(response) {
                                     callback(response.data);
                                 },
-                                function errorCallback(response) {
+                                function(response) {
+                                    errorCallback(response);
                                 }
                         );
                     }
