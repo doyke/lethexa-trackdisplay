@@ -72,6 +72,7 @@
                     result = result && isTrackInArea(track, trackFilter.area);
                     result = result && isTrackInTrackIdList(track, trackFilter.trackIdList);
                     result = result && checkStringExpression(track.name, trackFilter.trackName);
+                    result = result && checkStringExpression(track.callsign, trackFilter.callsign);
                     result = result && checkStringExpression(track.dest, trackFilter.destination);
                     result = result && checkIfExpression(track.speed, trackFilter.speed);
                     result = result && checkIfExpression(track.draught, trackFilter.draught);
