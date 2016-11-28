@@ -4,72 +4,72 @@ module.exports = function (grunt) {
 
     // Project configuration.
     grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
-            'string-replace': {
+        pkg: grunt.file.readJSON('package.json'),
+        'string-replace': {
             dist: {
-            files: {
-            'dist/': 'public/<%= pkg.name %>.js'
-            },
-                    options: {
+                files: {
+                    'dist/': 'public/<%= pkg.name %>.js'
+                },
+                options: {
                     replacements: [{
-                    pattern: '###VERSION###',
+                            pattern: '###VERSION###',
                             replacement: '<%= pkg.version %>'
-                    }]
-                    }
+                        }]
+                }
             }
-            },
-            jshint: {
+        },
+        jshint: {
             all: ['lib/**/*.js']
-            },
-            yuidoc: {
+        },
+        yuidoc: {
             all: {
-            name: '<%= pkg.name %>',
-                    description: '<%= pkg.description %>',
-                    version: '<%= pkg.version %>',
-                    url: '<%= pkg.homepage %>',
-                    options: {
+                name: '<%= pkg.name %>',
+                description: '<%= pkg.description %>',
+                version: '<%= pkg.version %>',
+                url: '<%= pkg.homepage %>',
+                options: {
                     nocode: true,
-                            paths: ['lib/'],
-                            outdir: 'doc/'
-                    }
+                    paths: ['lib/'],
+                    outdir: 'doc/'
+                }
             }
-            },
-            mochaTest: {
+        },
+        mochaTest: {
             test: {
-            options: {
-            reporter: 'spec',
+                options: {
+                    reporter: 'spec',
                     captureFile: 'results.txt', // Optionally capture the reporter output to a file
                     quiet: false, // Optionally suppress output to standard out (defaults to false)
                     clearRequireCache: false // Optionally clear the require cache before running tests (defaults to false)
-            },
-                    src: ['test/**/*.js']
+                },
+                src: ['test/**/*.js']
             }
-            },
-            env: {
+        },
+        env: {
             coverage: {
-            APP_DIR_FOR_CODE_COVERAGE: '../coverage/instrument/lib/'
+                APP_DIR_FOR_CODE_COVERAGE: '../coverage/instrument/lib/'
             }
-            },
-            instrument: {
+        },
+        instrument: {
             files: 'lib/*.js',
-                    options: {
-                    lazy: true,
-                            basePath: 'coverage/instrument/'
-                    }
-            },
-            storeCoverage: {
             options: {
-            dir: 'coverage/reports'
+                lazy: true,
+                basePath: 'coverage/instrument/'
             }
-            },
-            makeReport: {
+        },
+        storeCoverage: {
+            options: {
+                dir: 'coverage/reports'
+            }
+        },
+        makeReport: {
             src: 'coverage/reports/**/*.json',
-                    options: {
-                    type: 'cobertura',
-                            dir: 'coverage/reports',
-                            print: 'detail'
-                    }
+            options: {
+                type: 'cobertura',
+                dir: 'coverage/reports',
+                print: 'detail'
             }
+        }
     });
 
     grunt.loadNpmTasks('grunt-string-replace');
