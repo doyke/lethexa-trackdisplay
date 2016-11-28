@@ -15,7 +15,6 @@
                 min: '@',
                 max: '@',
                 step: '@',
-                width: '@',
                 editable: '=?'
             },
             templateUrl: 'input-unit/input-unit.html',
@@ -26,7 +25,6 @@
     inputUnit.controller('InputUnitCtrl', ['$scope', function ($scope) {
             $scope.unitFactor = $scope.unitFactor || 1.0;
             $scope.step = $scope.step || 1.0;
-            $scope.width = $scope.width || '100%';
 
             $scope.$watch('ngModel', function (modelValue) {
                 if (modelValue === undefined) {
