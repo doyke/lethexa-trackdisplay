@@ -28,7 +28,7 @@
                 <td>
                     <div class="row" style="margin: 0px;">
                         <div class="col-md-3" style="height:100%; padding: 0px;">
-                            <select ng-options="operator for operator in operators" ng-model="trackFilter.speed.op"></select>
+                            <select-operation ng-model="trackFilter.speed.op"></select-operation>
                         </div>
                         <div class="col-md-9" style="height:100%; padding: 0px;">
                             <input-unit editable="true" ng-model="trackFilter.speed.value" unit="{{units.speed.unit}}" unit-factor="units.speed.unitFactor" width="'75%'" min="0" step="0.1"></input-unit>
@@ -41,7 +41,7 @@
                 <td>
                     <div class="row" style="margin: 0px;">
                         <div class="col-md-3" style="height:100%; padding: 0px;">
-                            <select ng-options="operator for operator in operators" ng-model="trackFilter.draught.op"></select>
+                            <select-operation ng-model="trackFilter.draught.op"></select-operation>
                         </div>
                         <div class="col-md-9" style="height:100%; padding: 0px;">
                             <input-unit editable="true" ng-model="trackFilter.draught.value" unit="{{units.depth.unit}}" unit-factor="units.depth.unitFactor" min="0" step="0.1"></input-unit>
@@ -54,7 +54,7 @@
                 <td>
                     <div class="row" style="margin: 0px;">
                         <div class="col-md-3" style="height:100%; padding: 0px;">
-                            <select ng-options="operator for operator in operators" ng-model="trackFilter.length.op"></select>
+                            <select-operation ng-model="trackFilter.length.op"></select-operation>
                         </div>
                         <div class="col-md-9" style="height:100%; padding: 0px;">
                             <input-unit editable="true" ng-model="trackFilter.length.value" unit="{{units.length.unit}}" unit-factor="units.length.unitFactor" min="0" step="1.0"></input-unit>
@@ -67,7 +67,7 @@
                 <td>
                     <div class="row" style="margin: 0px;">
                         <div class="col-md-3" style="height:100%; padding: 0px;">
-                            <select ng-options="operator for operator in operators" ng-model="trackFilter.beam.op"></select>
+                            <select-operation ng-model="trackFilter.beam.op"></select-operation>
                         </div>
                         <div class="col-md-9" style="height:100%; padding: 0px;">
                             <input-unit editable="true" ng-model="trackFilter.beam.value" unit="{{units.length.unit}}" unit-factor="units.length.unitFactor" min="0" step="1.0"></input-unit>

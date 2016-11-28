@@ -3,6 +3,7 @@
 (function () {
 
     var trackFilter = angular.module('trackFilter', [
+        'selectOperation'
     ]);
 
     trackFilter.directive('trackFilter', function () {
