@@ -123,14 +123,14 @@
                     <tr ng-show='selected.objlength !== undefined'>
                         <td>Length:</td>
                         <td>
-                            <input-unit editable="editable" ng-model="selected.objlength" unit="{{units.length.unit}}" unit-factor="units.length.unitFactor" min="0" step="0.1"></input-unit>
-                        </td>
+                    <input-unit editable="editable" ng-model="selected.objlength" unit="{{units.length.unit}}" unit-factor="units.length.unitFactor" min="0" step="0.1"></input-unit>
+                    </td>
                     </tr>
                     <tr ng-show='selected.objbeam !== undefined'>
                         <td>Beam:</td>
                         <td>
-                            <input-unit editable="editable" ng-model="selected.objbeam" unit="{{units.length.unit}}" unit-factor="units.length.unitFactor" min="0" step="0.1"></input-unit>
-                        </td>
+                    <input-unit editable="editable" ng-model="selected.objbeam" unit="{{units.length.unit}}" unit-factor="units.length.unitFactor" min="0" step="0.1"></input-unit>
+                    </td>
                     </tr>
                     <tr ng-show='selected.type !== undefined'>
                         <td>Type:</td>
@@ -154,8 +154,19 @@
             </div>
         </div>
 
-        <div ng-show="selected.trackId !== undefined" class="well well-sm">
-            <a target="_blank" href="http://www.marinetraffic.com/en/ais/details/ships/mmsi:{{selected.trackId}}">MarineTraffic.com</a>
+        <div class="panel panel-default" style="margin: 0px;">
+            <div class="panel-heading" style="padding-top: 0px; padding-bottom: 0px; padding-left: 30px;">
+                <toggle-btn enabled="panel5Visible"></toggle-btn>
+                Search the web
+            </div>
+            <div ng-show="panel5Visible" ng-init="panel5Visible = false;" class="panel-body" style="padding: 0px;">
+                <div ng-show="selected.trackId !== undefined" class="well well-sm" style="margin: 0;">
+                    <a target="_blank" ng-href="http://www.marinetraffic.com/en/ais/details/ships/mmsi:{{selected.trackId}}">MarineTraffic.com</a>
+                </div>
+                <div ng-show="selected.trackId !== undefined" class="well well-sm" style="margin: 0;">
+                    <a target="_blank" ng-href="https://www.vesseltracker.com/de/SearchResults.html?search={{selected.trackId}}">VesselTracker.com</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
