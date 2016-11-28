@@ -15,6 +15,7 @@
                 min: '@',
                 max: '@',
                 step: '@',
+                width: '@',
                 editable: '=?'
             },
             templateUrl: 'input-unit/input-unit.html',
@@ -25,21 +26,26 @@
     inputUnit.controller('InputUnitCtrl', ['$scope', function ($scope) {
             $scope.unitFactor = $scope.unitFactor || 1.0;
             $scope.step = $scope.step || 1.0;
-                        
-            $scope.$watch('ngModel', function(modelValue) {
-                if( modelValue === undefined)
-                    return;
-                var value = modelValue * $scope.unitFactor;
-                value = Math.floor(value / $scope.step) * $scope.step;
-                $scope._internalModelValue = value;
-                //console.log('$scope._internalModelValue', $scope._internalModelValue, $scope.unitFactor, $scope.unit);
+            $scope.width = $scope.width || '100%';
+
+            $scope.$watch('ngModel', function (modelValue) {
+                if (modelValue === undefined) {
+                    $scope._internalModelValue = undefined;
+                } else {
+                    var value = modelValue * $scope.unitFactor;
+                    value = Math.floor(value / $scope.step) * $scope.step;
+                    $scope._internalModelValue = value;
+                    //console.log('$scope._internalModelValue', $scope._internalModelValue, $scope.unitFactor, $scope.unit);
+                }
             });
-            
-            $scope.$watch('_internalModelValue', function(modelValue) {
-                if(modelValue === undefined)
-                    return;
-                var value = modelValue / $scope.unitFactor;
-                $scope.ngModel = value;
+
+            $scope.$watch('_internalModelValue', function (modelValue) {
+                if (modelValue === undefined) {
+                    $scope.ngModel = undefined;
+                } else {
+                    var value = modelValue / $scope.unitFactor;
+                    $scope.ngModel = value;
+                }
             });
         }]);
 

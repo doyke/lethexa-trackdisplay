@@ -10,7 +10,8 @@
             restrict: 'E',
             replace: true,
             scope: {
-                trackFilter: '='
+                trackFilter: '=',
+                units: '=?'
             },
             templateUrl: 'track-filter/track-filter.html',
             controller: 'TrackFilterCtrl'
