@@ -3,15 +3,19 @@
         'wsAPI'
     ]);
 
-    trackAPI.factory('$trackAPI', ['$wsAPI', '$http', function ($wsAPI, $http) {
-            var countries = {};
+    trackAPI.factory('$trackAPI', ['$wsAPI', '$http', '$window', function ($wsAPI, $http, $window) {
+            var countries;
 
-            $http.get('/country').then(
-                    function (response) {
-                        countries = response.data;
-                    }
-            );
+            var fetchCountries = function () {
+                $http.get('http://localhost:8888/country').then(
+                        function (response) {
+                            countries = response.data;
+                        }, function(err) {
+                            console.log('Problem loading countries', err);
+                        });
+            };
 
+            fetchCountries();
 
             $wsAPI.addListenerFor('track-update', function (data) {
                 //console.log(data);
@@ -84,19 +88,19 @@
                 fetchTrackFor: function (trackId, callback, errorCallback) {
                     if (isNaN(trackId)) {
                         $http.get('/track/name/' + trackId).then(
-                                function(response) {
+                                function (response) {
                                     callback(response.data);
                                 },
-                                function(response) {
+                                function (response) {
                                     errorCallback(response);
                                 }
                         );
                     } else {
                         $http.get('/track/id/' + trackId).then(
-                                function(response) {
+                                function (response) {
                                     callback(response.data);
                                 },
-                                function(response) {
+                                function (response) {
                                     errorCallback(response);
                                 }
                         );
@@ -124,6 +128,11 @@
                 },
 
                 getCountryFor: function (code) {
+                    console.log('getting countries.');
+                    if (countries === undefined) {
+                        fetchCountries();
+                        return 'Loading...';
+                    }
                     code = code ? code.toUpperCase() : 'XX';
                     return countries[code];
                 },
