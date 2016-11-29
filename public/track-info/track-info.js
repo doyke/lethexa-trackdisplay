@@ -3,6 +3,7 @@
 (function () {
 
     var trackInfo = angular.module('trackInfo', [
+        'settings',
         'trackAPI',
         'photoList',
         'inputText',
@@ -27,16 +28,28 @@
         };
     });
 
-    trackInfo.controller('TrackInfoCtrl', ['$scope', '$trackAPI', function ($scope, $trackAPI) {
+    trackInfo.controller('TrackInfoCtrl', ['$scope', '$trackAPI', '$settings', function ($scope, $trackAPI, $settings) {            
             $scope.cvtLatitudeToDegMinSec = geo.cvtLatitudeToDegMinSec;
             $scope.cvtLongitudeToDegMinSec = geo.cvtLongitudeToDegMinSec;
             $scope.countryName = '';
 
+            $scope.jsonRouteUrl = '#';
+            $scope.gpxRouteUrl = '#';
+            $scope.geojsonRouteUrl = '#';
+
             $scope.$watch('selected', function (selected) {
-                if (!selected)
+                if (!selected) {
+                    $scope.jsonRouteUrl = '#';
+                    $scope.gpxRouteUrl = '#';
+                    $scope.geojsonRouteUrl = '#';
                     $scope.countryName = '';
-                else
+                }
+                else {
+                    $scope.jsonRouteUrl = $settings.getStorageServerUrl() + '/track/history/' + selected.trackId + '/route.json';
+                    $scope.gpxRouteUrl = $settings.getStorageServerUrl() + '/track/history/' + selected.trackId + '/route.gpx';
+                    $scope.geojsonRouteUrl = $settings.getStorageServerUrl() + '/track/history/' + selected.trackId + '/route.geojson';
                     $scope.countryName = $trackAPI.getCountryFor(selected.country);
+                }
             });
 
             $scope.filterByMMSI = function () {
