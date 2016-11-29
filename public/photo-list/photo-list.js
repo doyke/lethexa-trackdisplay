@@ -21,6 +21,7 @@
     });
 
     photoList.controller('PhotoListCtrl', ['$scope', '$photoAPI', '$timeout', 'Upload', function ($scope, $photoAPI, $timeout, Upload) {
+            $scope.getPhotoUrl = $photoAPI.getPhotoUrl;
             $scope.photos = [];
             $scope.selectedPhoto = undefined;
             $scope.photoUrl = '';
@@ -39,7 +40,7 @@
 
             $scope.clickImage = function(photo) {
                 $scope.selectedPhoto = photo;
-                $scope.photoUrl = '/photos/' + photo._id;
+                $scope.photoUrl = $scope.getPhotoUrl(photo._id);
                 $scope.photoFilename = photo.filename;
             };
 

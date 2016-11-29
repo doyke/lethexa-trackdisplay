@@ -1,11 +1,17 @@
 (function () {
     var photoAPI = angular.module('photoAPI', [
+        'settings'
     ]);
 
-    photoAPI.factory('$photoAPI', ['$http', function ($http) {
+    photoAPI.factory('$photoAPI', ['$http', '$settings', function ($http, $settings) {
+
             return {
+                getPhotoUrl: function (photoId) {
+                    return $settings.getStorageServerUrl() + '/photos/' + photoId;
+                },
+
                 fetchPhotos: function (trackId, callback) {
-                    $http.get('/photos/track/' + trackId).then(
+                    $http.get($settings.getStorageServerUrl() + '/photos/track/' + trackId).then(
                             function successCallback(response) {
                                 callback(response.data);
                             },
@@ -15,7 +21,7 @@
                 },
                 
                 deletePhoto: function (photoId, callback) {
-                    $http.delete('/photos/' + photoId).then(
+                    $http.delete($settings.getStorageServerUrl() + '/photos/' + photoId).then(
                             function successCallback(response) {
                                 callback(response.data);
                             },

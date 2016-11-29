@@ -11,7 +11,7 @@
             require: 'E',
             replace: true,
             controller: 'TrackMapCtrl',
-            templateUrl: 'track-map/track-map.html',
+            template: '<div style="width: 100%; height: 100%;"></div>',
             scope: {
                 selected: '=?',
                 mapcenter: '=?',
@@ -20,7 +20,7 @@
         };
     });
 
-    trackMap.controller('TrackMapCtrl', ['$scope', '$trackAPI', function ($scope, $trackAPI) {
+    trackMap.controller('TrackMapCtrl', ['$scope', '$trackAPI', '$element', function ($scope, $trackAPI, $element) {
             var openStreetMapUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
             var openSeaMapmUrl = 'https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png';
             
@@ -30,7 +30,7 @@
                 area: [{lat: 53.25, lon: 8.125}, {lat: 53.75, lon: 8.25}]
             };
 */
-            var map = L.map('map').setView([53.5, 8.125], 10);
+            var map = L.map($element[0]).setView([53.5, 8.125], 10);
             L.tileLayer(openStreetMapUrl, {
                 minZoom: 3,
                 attribution: 'Background map &copy; <a href="osm.org/copyright">OpenStreetMap</a> contributors'

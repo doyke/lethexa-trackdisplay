@@ -1,13 +1,14 @@
 (function () {
     var trackAPI = angular.module('trackAPI', [
+        'settings',
         'wsAPI'
     ]);
 
-    trackAPI.factory('$trackAPI', ['$wsAPI', '$http', '$window', function ($wsAPI, $http, $window) {
+    trackAPI.factory('$trackAPI', ['$wsAPI', '$http', '$settings', function ($wsAPI, $http, $settings) {
             var countries;
 
             var fetchCountries = function () {
-                $http.get('http://localhost:8888/country').then(
+                $http.get($settings.getTerrainServerUrl() + '/country').then(
                         function (response) {
                             countries = response.data;
                         }, function(err) {
@@ -16,14 +17,6 @@
             };
 
             fetchCountries();
-
-            $wsAPI.addListenerFor('track-update', function (data) {
-                //console.log(data);
-            });
-
-            $wsAPI.addListenerFor('track-remove', function (data) {
-                //console.log(data);
-            });
 
             var isTrackInTrackIdList = function (track, trackIdList) {
                 if (!trackIdList)
@@ -87,7 +80,7 @@
 
                 fetchTrackFor: function (trackId, callback, errorCallback) {
                     if (isNaN(trackId)) {
-                        $http.get('/track/name/' + trackId).then(
+                        $http.get($settings.getStorageServerUrl() + '/track/name/' + trackId).then(
                                 function (response) {
                                     callback(response.data);
                                 },
@@ -96,7 +89,7 @@
                                 }
                         );
                     } else {
-                        $http.get('/track/id/' + trackId).then(
+                        $http.get($settings.getStorageServerUrl() + '/track/id/' + trackId).then(
                                 function (response) {
                                     callback(response.data);
                                 },
@@ -108,7 +101,7 @@
                 },
 
                 fetchTrackByName: function (name, callback) {
-                    $http.get('/track/name/' + name).then(
+                    $http.get($settings.getStorageServerUrl() + '/track/name/' + name).then(
                             function successCallback(response) {
                                 callback(response.data);
                             },
@@ -118,7 +111,7 @@
                 },
 
                 fetchHistoryPathFor: function (trackId, callback) {
-                    $http.get('/track/history/' + trackId + '/route.json').then(
+                    $http.get($settings.getStorageServerUrl() + '/track/history/' + trackId + '/route.json').then(
                             function successCallback(response) {
                                 callback(response.data);
                             },

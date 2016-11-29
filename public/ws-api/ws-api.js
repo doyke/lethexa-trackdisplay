@@ -1,9 +1,10 @@
 (function () {
     var wsAPI = angular.module('wsAPI', [
+        'settings',
         'ngWebSocket'
     ]);
 
-    wsAPI.factory('$wsAPI', ['$websocket', '$window', function ($websocket, $window) {
+    wsAPI.factory('$wsAPI', ['$websocket', '$settings', function ($websocket, $settings) {
             var listenerMap = {};
             var trackStream;
 
@@ -17,7 +18,7 @@
             };
 
             var connect = function () {
-                trackStream = $websocket('ws://' + $window.location.host + '/', 'echo-protocol');
+                trackStream = $websocket($settings.getTrackStreamUrl(), 'echo-protocol');
 
                 trackStream.onOpen(function () {
                     console.log('Websocket opened');

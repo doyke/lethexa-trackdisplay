@@ -34,7 +34,6 @@
         $scope.mapcenter = track;
         $scope.selected = track;
       }, function() {
-          console.log($scope.selected);
         $scope.selected = undefined;  
       });
     };
