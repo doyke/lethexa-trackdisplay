@@ -128,7 +128,6 @@
                 },
 
                 getCountryFor: function (code) {
-                    console.log('getting countries.');
                     if (countries === undefined) {
                         fetchCountries();
                         return 'Loading...';
