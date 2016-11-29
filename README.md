@@ -51,6 +51,9 @@ To clear all tracks:
 	}
 
 
+For additional services (countrynames, photos, routes) to work you have to start the terrainsvr and mqstorage.
+
+
 Installation
 ------------
 
