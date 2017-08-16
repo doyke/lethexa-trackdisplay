@@ -6,6 +6,10 @@
     photoAPI.factory('$photoAPI', ['$http', '$settings', function ($http, $settings) {
 
             return {
+                getPhotoPostUrl: function(trackId) {
+                    return $settings.getStorageServerUrl() + '/photos/track/' + trackId;
+                },
+                
                 getPhotoUrl: function (photoId) {
                     return $settings.getStorageServerUrl() + '/photos/' + photoId;
                 },

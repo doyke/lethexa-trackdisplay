@@ -20,7 +20,7 @@
         };
     });
 
-    photoUpload.controller('PhotoUploadCtrl', ['$scope', 'Upload', '$timeout', '$photoAPI', function ($scope, Upload, $timeout) {
+    photoUpload.controller('PhotoUploadCtrl', ['$scope', 'Upload', '$timeout', '$photoAPI', '$settings', function ($scope, Upload, $timeout, $photoAPI, $settings) {
             $scope.uploading = false;
 
             $scope.$watch('files', function () {
@@ -34,6 +34,10 @@
             $scope.log = '';
 
             $scope.upload = function (files) {
+                var uploadUrl = $settings.getStorageServerUrl() + '/photos/' + $scope.selected.trackId;
+                
+                console.log('Uploading to', uploadUrl);
+                
                 if (files && files.length) {
                     for (var i = 0; i < files.length; i++) {
                         var file = files[i];
@@ -43,7 +47,7 @@
                             $scope.uploading = true;
                             $scope.percentComplete = 0;
                             Upload.upload({
-                                url: '/photos/' + $scope.selected.trackId,
+                                url: uploadUrl,
                                 data: {
                                     recfile: file
                                 }

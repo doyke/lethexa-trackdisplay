@@ -20,7 +20,7 @@
         };
     });
 
-    photoList.controller('PhotoListCtrl', ['$scope', '$photoAPI', '$timeout', 'Upload', function ($scope, $photoAPI, $timeout, Upload) {
+    photoList.controller('PhotoListCtrl', ['$scope', '$photoAPI', '$timeout', 'Upload', '$settings', function ($scope, $photoAPI, $timeout, Upload, $settings) {
             $scope.getPhotoUrl = $photoAPI.getPhotoUrl;
             $scope.photos = [];
             $scope.selectedPhoto = undefined;
@@ -74,7 +74,7 @@
                             $scope.uploading = true;
                             $scope.percentComplete = 0;
                             Upload.upload({
-                                url: '/photos/track/' + $scope.selected.trackId,
+                                url: $photoAPI.getPhotoPostUrl($scope.selected.trackId),
                                 data: {
                                     recfile: file
                                 }
