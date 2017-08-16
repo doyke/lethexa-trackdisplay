@@ -34,7 +34,7 @@
     "leaflet-tracksymbol": "^1.0.7",
     "lethexa-units": "^1.0.2",
     "leaflet-draw": "leaflet.draw#^0.4.0",
-    "lethexa-geo": "~1.0.10",
+    "lethexa-geo": "~1.0.11",
     "ng-file-upload": "^12.2.13"
   }
 }
