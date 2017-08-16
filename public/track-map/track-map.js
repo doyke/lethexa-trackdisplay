@@ -168,7 +168,7 @@
                 }
             });
 
-            $trackAPI.addListenerFor('track-remove', function(track) {
+            $trackAPI.addListenerFor('entity-remove', function(track) {
 //                console.log('track-remove', track.trackId);
                 var trackMarker = trackPicture[track.trackId];
                 if(trackMarker) {
@@ -177,7 +177,7 @@
                 }
             });
 
-            $trackAPI.addListenerFor('track-update', function (track) {
+            $trackAPI.addListenerFor('entity-update', function (track) {
 
                 if (trackPicture[track.trackId] === undefined) {
 
