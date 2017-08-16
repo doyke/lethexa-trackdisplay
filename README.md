@@ -3,10 +3,10 @@ lethexa-trackdisplay
 
 This is a Track-display for the browser written in angularJS/nodeJS.
 Tracks are provided via RabbitMQ to the webserver. Websockets are used
-to dynamically update the tracks.
+to dynamically update the tracks. A mongo-db stores the track-history.
 
 To show tracks on the display send json-objects to AMQP 
-to topic 'sim.tracks.xyz':
+to topic 'sim.tracks.xyz' on exchange 'simulator':
 
 	{
             header: {
