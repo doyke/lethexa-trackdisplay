@@ -20,7 +20,8 @@
         };
     });
 
-    trackMap.controller('TrackMapCtrl', ['$scope', '$trackAPI', '$element', function ($scope, $trackAPI, $element) {
+    trackMap.controller('TrackMapCtrl', ['$scope', '$trackAPI', '$element', '$settings', function ($scope, $trackAPI, $element, $settings) {
+            var internalMapUrl = $settings.getTerrainServerUrl() + '/textures/tiles/{z}/{x}/{y}.png';
             var openStreetMapUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
             var openSeaMapmUrl = 'https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png';
             
@@ -31,15 +32,31 @@
             };
 */
             var map = L.map($element[0]).setView([53.5, 8.125], 10);
-            L.tileLayer(openStreetMapUrl, {
+            var osmLayer = L.tileLayer(openStreetMapUrl, {
                 minZoom: 3,
                 attribution: 'Background map &copy; <a href="osm.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
+            
+            var internalMapLayer = L.tileLayer(internalMapUrl, {
+                minZoom: 0,
+                attribution: 'Internal map based on OSM-data'
+            }).addTo(map);
 
-            L.tileLayer(openSeaMapmUrl, {
+            var openSeaMapLayer = L.tileLayer(openSeaMapmUrl, {
                 minZoom: 3,
                 attribution: 'Overlay map &copy; <a href="http://openseamap.org">OpenSeaMap</a> contributors'
             }).addTo(map);
+
+
+
+            L.control.layers({
+                'Internal-Map': internalMapLayer,
+                'OSM-Map': osmLayer
+            }, {
+                'OpenSeaMap': openSeaMapLayer
+                //'Objects': trackLayer
+            }).addTo(map);
+
 
             var trackPicture = {};
             var trackLayer = L.featureGroup([]);
