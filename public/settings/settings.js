@@ -5,7 +5,7 @@
     settings.factory('$settings', ['$http', '$window', function ($http, $window) {
 
             var storageServerUrl = 'http://' + $window.location.hostname + ':8001';
-            var terrainServerUrl = 'http://' + $window.location.hostname + ':8888';
+            var terrainServerUrl = 'http://' + $window.location.hostname + ':8002';
             var trackStreamUrl = 'ws://' + $window.location.host + '/';
             
             console.log('storage server', storageServerUrl);

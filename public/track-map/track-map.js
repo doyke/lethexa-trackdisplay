@@ -21,41 +21,78 @@
     });
 
     trackMap.controller('TrackMapCtrl', ['$scope', '$trackAPI', '$element', '$settings', function ($scope, $trackAPI, $element, $settings) {
-            var internalMapUrl = $settings.getTerrainServerUrl() + '/textures/tiles/{z}/{x}/{y}.png';
+            var internalMapUrl = $settings.getTerrainServerUrl() + '/tiles/{z}/{x}/{y}.png';
             var openStreetMapUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-            var openSeaMapmUrl = 'https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png';
-            
-/*
-            $scope.trackFilter = {
-                trackIdList: [565589000, 236342000],
-                area: [{lat: 53.25, lon: 8.125}, {lat: 53.75, lon: 8.25}]
-            };
-*/
-            var map = L.map($element[0]).setView([53.5, 8.125], 10);
-            var osmLayer = L.tileLayer(openStreetMapUrl, {
-                minZoom: 3,
-                attribution: 'Background map &copy; <a href="osm.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
-            
+            var openSeaMapUrl = 'https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png';
+            var mapId = $element[0];
+            var map = L.map(mapId).setView([
+                $scope.lat ? $scope.lat : 54.0,
+                $scope.lon ? $scope.lon : 9.5
+            ], $scope.zoom ? $scope.zoom : 8);
+
             var internalMapLayer = L.tileLayer(internalMapUrl, {
                 minZoom: 0,
-                attribution: 'Internal map based on OSM-data'
+                maxZoom: 18,
+                attribution: 'Internal map based on OpenStreetMap-import'
             }).addTo(map);
 
-            var openSeaMapLayer = L.tileLayer(openSeaMapmUrl, {
+            var openStreetMapLayer = L.tileLayer(openStreetMapUrl, {
+                minZoom: 0,
+                attribution: 'Background map © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+            });//.addTo(map);
+
+            var openSeaMapLayer = L.tileLayer(openSeaMapUrl, {
                 minZoom: 3,
                 attribution: 'Overlay map &copy; <a href="http://openseamap.org">OpenSeaMap</a> contributors'
             }).addTo(map);
 
 
-
             L.control.layers({
                 'Internal-Map': internalMapLayer,
-                'OSM-Map': osmLayer
+                'OSM-Map': openStreetMapLayer
             }, {
                 'OpenSeaMap': openSeaMapLayer
                 //'Objects': trackLayer
             }).addTo(map);
+
+            
+            
+            
+//            var internalMapUrl = $settings.getTerrainServerUrl() + '/tiles/{z}/{x}/{y}.png';
+//            var openStreetMapUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+//            var openSeaMapmUrl = 'https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png';
+//            
+///*
+//            $scope.trackFilter = {
+//                trackIdList: [565589000, 236342000],
+//                area: [{lat: 53.25, lon: 8.125}, {lat: 53.75, lon: 8.25}]
+//            };
+//*/
+//            var map = L.map($element[0]).setView([53.5, 8.125], 10);
+//            var osmLayer = L.tileLayer(openStreetMapUrl, {
+//                minZoom: 3,
+//                attribution: 'Background map &copy; <a href="osm.org/copyright">OpenStreetMap</a> contributors'
+//            }).addTo(map);
+//            
+//            var internalMapLayer = L.tileLayer(internalMapUrl, {
+//                minZoom: 0,
+//                attribution: 'Internal map based on OSM-data'
+//            }).addTo(map);
+//
+//            var openSeaMapLayer = L.tileLayer(openSeaMapmUrl, {
+//                minZoom: 3,
+//                attribution: 'Overlay map &copy; <a href="http://openseamap.org">OpenSeaMap</a> contributors'
+//            }).addTo(map);
+
+
+
+//            L.control.layers({
+//                'Internal-Map': internalMapLayer,
+//                'OSM-Map': osmLayer
+//            }, {
+//                'OpenSeaMap': openSeaMapLayer
+//                //'Objects': trackLayer
+//            }).addTo(map);
 
 
             var trackPicture = {};
